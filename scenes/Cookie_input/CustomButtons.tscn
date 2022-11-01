@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Cookie_input/CustomButtons.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Cookie_input/TextureButton.tscn" type="PackedScene" id=4]
+
+[node name="CustomButtons" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="TextureButton5" parent="." instance=ExtResource( 4 )]
+margin_left = -75.0
+margin_top = -76.0
+margin_right = -11.0
+margin_bottom = -12.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton6" parent="." instance=ExtResource( 4 )]
+margin_left = 15.0
+margin_top = -76.0
+margin_right = 79.0
+margin_bottom = -12.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton7" parent="." instance=ExtResource( 4 )]
+margin_left = 15.0
+margin_top = 13.0
+margin_right = 79.0
+margin_bottom = 77.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton8" parent="." instance=ExtResource( 4 )]
+margin_left = -75.0
+margin_top = 13.0
+margin_right = -11.0
+margin_bottom = 77.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

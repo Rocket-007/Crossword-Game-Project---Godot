@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/Cookie_input/debug_overlay.gd" type="Script" id=1]
+
+[node name="debug_overlay" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 29.0
+margin_top = 23.0
+margin_right = 69.0
+margin_bottom = 37.0
+text = "hellllllllo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
