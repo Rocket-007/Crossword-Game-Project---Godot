@@ -106,7 +106,7 @@ func _on_cookie_input_word_drag_stop():
 #						need some variables
 						var text_font_size = 35
 						var text_x_offset = 50
-						var text_y_offset = 0
+						var text_y_offset = -35
 #						first check if the word is across
 						if word.down_across() == "across":
 #							then we will increase a var toward the right according to the word length
@@ -124,8 +124,9 @@ func _on_cookie_input_word_drag_stop():
 #								set the position to the position of the word dragged LABEL scene (need to make it a bit more complicated than that)
 								texture_grid_text.set_position(  #set position to
 								cookie_input.get_node("Label").rect_global_position / self.scale  #global pos of word dragged LABEL / self.scale (this is to fix if we scale the tile map)
-								- (cookie_input.get_node("Label").get_rect().size)  # minus dragged LABEL size (might be == to text font size too)
-								- Vector2((cookie_input.get_node("Label").get_total_character_count()-1) * text_font_size, 0)  #make it dynamicly addjusst to the amount of letters
+								- (self.position / self.scale)  # minus it with the position/scale of self's, this is to keep it from moving when we reposition self  
+								+ (cookie_input.get_node("Label").get_rect().size)  # add dragged LABEL size (might be == to text font size too)
+								- Vector2((cookie_input.get_node("Label").get_total_character_count()+1) * text_font_size, 0) #make it dynamicly adjust to the amount of letters
 								+ Vector2(text_x_offset * l, text_y_offset))  # spacing btw the letters any other offsetting
 								
 #								now to animate it to the final grid matching position
@@ -154,11 +155,12 @@ func _on_cookie_input_word_drag_stop():
 								var texture_grid_text = TextureGridTextTscn.instance()
 								texture_grid_text.text = layout.grid[j + l][k]
 								
-								texture_grid_text.set_position(
-								cookie_input.get_node("Label").rect_global_position / self.scale
-								- (cookie_input.get_node("Label").get_rect().size)
-								- Vector2((cookie_input.get_node("Label").get_total_character_count()-1) * text_font_size, 0)
-								+ Vector2(text_x_offset * l, text_y_offset))
+								texture_grid_text.set_position(  #set position to
+								cookie_input.get_node("Label").rect_global_position / self.scale  #global pos of word dragged LABEL / self.scale (this is to fix if we scale the tile map)
+								- (self.position / self.scale)  # minus it with the position/scale of self's, this is to keep it from moving when we reposition self  
+								+ (cookie_input.get_node("Label").get_rect().size)  # add dragged LABEL size (might be == to text font size too)
+								- Vector2((cookie_input.get_node("Label").get_total_character_count()+1) * text_font_size, 0) #make it dynamicly adjust to the amount of letters
+								+ Vector2(text_x_offset * l, text_y_offset))  # spacing btw the letters any other offsetting
 								
 #								now to animate it to the final grid matching position
 								$Tween.interpolate_property(
@@ -243,5 +245,8 @@ func _process(delta):
 
 
 func _draw():
-	draw_circle(cookie_input.get_node("Label").rect_global_position / self.scale   - (cookie_input.get_node("Label").get_rect().size) - Vector2((cookie_input.get_node("Label").get_total_character_count()-1) * 35,0), 10.0, Color.blueviolet)
+#	draw_circle((cookie_input.get_node("Label").rect_global_position / self.scale) - (self.position / self.scale)
+#	+ (cookie_input.get_node("Label").get_rect().size)
+#	- Vector2((cookie_input.get_node("Label").get_total_character_count()+1) * 35,0),
+#	10.0, Color.blueviolet)
 	pass

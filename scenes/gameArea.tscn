@@ -115,17 +115,19 @@ script = ExtResource( 3 )
 
 [node name="ControTileMap" type="Control" parent="."]
 anchor_right = 1.0
-margin_right = 12.0
-margin_bottom = 490.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="WordTileMap" type="TileMap" parent="ControTileMap"]
 self_modulate = Color( 0.223529, 0.0862745, 0.0666667, 1 )
-position = Vector2( 231, 17 )
+position = Vector2( 530, 10 )
 scale = Vector2( 0.57, 0.57 )
 z_index = 4
 tile_set = ExtResource( 4 )
 format = 1
-tile_data = PoolIntArray( 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 131076, 0, 0, 131081, 0, 0, 196611, 0, 0, 196612, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 327684, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 393220, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0 )
+tile_data = PoolIntArray( 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 131076, 0, 0, 131081, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 327684, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 393220, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0 )
 script = ExtResource( 6 )
 
 [node name="Tween" type="Tween" parent="ControTileMap/WordTileMap"]
