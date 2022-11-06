@@ -5,52 +5,67 @@ extends Node2D
 
 
 
+var level_index = 0
 
-#
-#var input_json = [
-#	{"answer":"standard"},
-#	{"answer":"computer"},
-#	{"answer":"equipment"},
-#	{"answer":"port"},
-#	{"answer":"interface"}]
-
-
-#[0] - word
-#[1] - clue
-#[2] - solved
-
-var levels_json = [
-	[["TAMED", "clue1", true],
-	["MEAD", "clue2", true],
-	["EAT", "clue3"],
-	["ATE", "clue4"],
-	["A", "clue4"],
-	["MADE", "clue5", true],
-	["DAM", "clue6"],
-	["MATED", "clue7", true]],
-
-	[["SPIT", "clue2", true],
-	["SIP", "clue1", true],
-	["KIT", "clue1", true],
-	["PIT", "clue1", true],
-	["TIP", "clue1", true],
-	["INK", "clue1", false],
-	["SLIP", "clue1", true],
-	["TIP", "clue1", true],
-	["SINK", "clue1", true],
-	["INK", "clue1", true],
-	["SIT", "clue1", true]],
-]
-
-
-var input_json = levels_json[0]
+var input_json = Levels.levels_json[level_index]
 
 onready var gameArea = get_tree().root.get_node("gameArea")
 
-# Called when the node enters the scene tree for the first time.
+
+#____________________________________________________
+# Path to save file 
+#var path = "user://configuration.cfg"
+var path = "res://configuration.cfg"
+var file_to_save= path
+var file_to_load= path
+
+var configFile = ConfigFile.new()
+
+func createSave():
+	configFile.load(file_to_load) 
+	var err = configFile.load(file_to_load) 
+	if err != OK:
+		# Add values to file 
+		configFile.set_value("Highest","level",0) 
+		configFile.set_value("Highest","clicks",0) 
+		configFile.set_value("Highest","time",0)
+
+		configFile.set_value("Overall","clicks",0) 
+		configFile.set_value("Overall","time",0)
+		
+		configFile.set_value("Settings","music",true)
+		configFile.set_value("Settings","sfx",true)
+	 
+		# Save file 
+		configFile.save(file_to_save)
+
+#
+#	if configFile.has_section("Highest"):
+#		pass
+#
+#	if configFile.has_section("Overall"):
+#		pass
+
+
+
+func load_level(level): # funciton has the job of changing the crossword input and scene
+	input_json = Levels.levels_json[level-1]
+	get_tree().change_scene("res://scenes/gameArea.tscn")
+		
+
+
 func _ready():
 #	input_json = levels_json[1]
 #	yield(get_tree().create_timer(14.0), "timeout")
+
+#_______________________________________________	
+#	Initiate ConfigFile 
+	configFile = ConfigFile.new()
+	createSave()
+	print("created save")
+
+ 
+
 	pass
 
 
@@ -60,6 +75,15 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("ui_right"):
 		print("level complete")
+		level_index += 1
 #		get_tree().reload_current_scene()
-		input_json = levels_json[0]
-		get_tree().change_scene("res://scenes/gameArea.tscn")
+		load_level(level_index+1)
+		
+
+		
+	if event.is_action_pressed("ui_left"):
+		level_index -= 1
+#		get_tree().reload_current_scene()
+		load_level(level_index+1)
+
+

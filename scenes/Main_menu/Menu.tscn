@@ -1,0 +1,314 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://scenes/Main_menu/Menu.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Peach Days.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=5]
+blend_mode = 2
+
+[sub_resource type="Gradient" id=4]
+
+[sub_resource type="GradientTexture2D" id=6]
+gradient = SubResource( 4 )
+width = 434
+height = 664
+
+[sub_resource type="AtlasTexture" id=9]
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=10]
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=11]
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=12]
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=13]
+region = Rect2( 512, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=14]
+region = Rect2( 640, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=15]
+region = Rect2( 768, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=16]
+region = Rect2( 896, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=17]
+region = Rect2( 1024, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=18]
+region = Rect2( 1152, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=19]
+region = Rect2( 1280, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=20]
+region = Rect2( 1408, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=21]
+region = Rect2( 1536, 0, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=22]
+animations = [ {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="DynamicFont" id=7]
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=25]
+font_data = ExtResource( 5 )
+
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="DynamicFont" id=24]
+size = 60
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 40
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=23]
+size = 25
+font_data = ExtResource( 5 )
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.980392, 0.505882, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="TextureRect" parent="."]
+visible = false
+material = SubResource( 5 )
+margin_left = 623.0
+margin_top = 868.0
+margin_right = 1057.0
+margin_bottom = 1532.0
+rect_rotation = 89.9999
+mouse_filter = 2
+texture = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 410, 270 )
+rotation = -0.220358
+scale = Vector2( 5.13281, 5.13281 )
+frames = SubResource( 22 )
+frame = 9
+playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 60, 1054 )
+rotation = 0.0422393
+scale = Vector2( -5.04154, 5.13281 )
+frames = SubResource( 22 )
+frame = 6
+playing = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -144.0
+margin_top = -625.0
+margin_right = 144.0
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_right = 292.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 120 )
+focus_neighbour_top = NodePath("../Button3")
+custom_fonts/font = SubResource( 7 )
+text = "PLAY"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+margin_top = 124.0
+margin_right = 292.0
+margin_bottom = 244.0
+rect_min_size = Vector2( 0, 120 )
+custom_fonts/font = SubResource( 7 )
+text = "OPTIONS"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+margin_top = 248.0
+margin_right = 292.0
+margin_bottom = 368.0
+rect_min_size = Vector2( 0, 120 )
+focus_neighbour_bottom = NodePath("../Button")
+custom_fonts/font = SubResource( 7 )
+text = "EXIT"
+
+[node name="SocialButt" type="VBoxContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -144.0
+margin_top = -138.0
+margin_right = 144.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SocialButt"]
+margin_top = 66.0
+margin_right = 288.0
+margin_bottom = 66.0
+alignment = 1
+
+[node name="socialB" type="TextureButton" parent="SocialButt/HBoxContainer"]
+margin_left = 140.0
+margin_right = 140.0
+
+[node name="socialB2" type="TextureButton" parent="SocialButt/HBoxContainer"]
+margin_left = 144.0
+margin_right = 144.0
+
+[node name="socialB3" type="TextureButton" parent="SocialButt/HBoxContainer"]
+margin_left = 148.0
+margin_right = 148.0
+
+[node name="Label" type="Label" parent="SocialButt"]
+margin_top = 70.0
+margin_right = 288.0
+margin_bottom = 72.0
+custom_fonts/font = SubResource( 25 )
+text = "ROCKET_007"
+align = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 87.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+margin_right = 1024.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+theme = SubResource( 1 )
+custom_fonts/font = SubResource( 24 )
+text = "ballsbeat"
+align = 1
+valign = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 8.0
+margin_top = -352.0
+margin_right = 228.0
+margin_bottom = -157.0
+
+[node name="Label" type="Label" parent="VBoxContainer3"]
+margin_right = 220.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 0, 90 )
+theme = SubResource( 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Highest rec:"
+valign = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer3"]
+margin_top = 94.0
+margin_right = 220.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 0, 30 )
+theme = SubResource( 1 )
+custom_fonts/font = SubResource( 23 )
+text = "LEVEL: "
+valign = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer3"]
+margin_top = 128.0
+margin_right = 220.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 0, 30 )
+theme = SubResource( 1 )
+custom_fonts/font = SubResource( 23 )
+text = "CLICKS: "
+valign = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer3"]
+margin_top = 162.0
+margin_right = 220.0
+margin_bottom = 192.0
+rect_min_size = Vector2( 0, 30 )
+theme = SubResource( 1 )
+custom_fonts/font = SubResource( 23 )
+text = "TIME: "
+valign = 1
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -220.0
+margin_top = 255.0
+margin_bottom = 450.0
+
+[node name="Label" type="Label" parent="VBoxContainer4"]
+margin_right = 220.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 0, 90 )
+theme = SubResource( 1 )
+custom_fonts/font = SubResource( 8 )
+text = "overal rec:"
+valign = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer4"]
+margin_top = 94.0
+margin_right = 220.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 0, 30 )
+theme = SubResource( 1 )
+custom_fonts/font = SubResource( 23 )
+text = "CLICKS: "
+valign = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer4"]
+margin_top = 129.0
+margin_right = 220.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 0, 30 )
+theme = SubResource( 1 )
+custom_fonts/font = SubResource( 23 )
+text = "TIME: "
+valign = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="SocialButt/HBoxContainer/socialB" to="." method="_on_socialB_pressed"]
+[connection signal="pressed" from="SocialButt/HBoxContainer/socialB2" to="." method="_on_socialB2_pressed"]
+[connection signal="pressed" from="SocialButt/HBoxContainer/socialB3" to="." method="_on_socialB3_pressed"]

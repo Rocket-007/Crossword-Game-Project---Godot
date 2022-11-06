@@ -20,6 +20,9 @@ func _ready():
 ##	label.rect_global_position = rect_global_position
 #	add_child(label)
 
+#	noticed a problem with deleting the previous buttons, so gotto check to prevent crash
+	if combinator_array.size() >= get_parent().get_child_count():
+		pass
 	letter = combinator_array[get_parent().get_children().find(self)]
 
 	

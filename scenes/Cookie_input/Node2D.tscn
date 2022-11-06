@@ -32,9 +32,6 @@ margin_top = -170.0
 margin_right = 123.0
 margin_bottom = -135.0
 text = ""
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Line2D" type="Line2D" parent="."]
 default_color = Color( 0.662745, 0.4, 0.109804, 1 )

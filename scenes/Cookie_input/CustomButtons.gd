@@ -18,7 +18,7 @@ var Label_Tscn = preload("res://scenes/Cookie_input/Label.tscn")
 
 
 
-static func delete_children(node):
+func delete_children(node):
 	for n in node.get_children():
 		node.remove_child(n)
 		n.queue_free()
@@ -38,6 +38,8 @@ func _ready():
 	
 	var step = 2 * PI / count
 	
+	
+
 	for i in range(count):
 		var spawn_pos =  center + radius.rotated(step * i)
 		

@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="Button" type="Button"]
+margin_left = 244.0
+margin_right = 433.0
+margin_bottom = 133.0
+text = "1"

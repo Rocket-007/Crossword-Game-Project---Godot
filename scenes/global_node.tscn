@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/global_node.gd" type="Script" id=2]
+
+[node name="global_node" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

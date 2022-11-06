@@ -12,7 +12,7 @@ onready var combinator_array = get_parent().get_node("union_combinator").combina
 
 func displayOverlayDebugging():
 	var overlay = load("res://scenes/Cookie_input/debug_overlay.tscn").instance()
-#	overlay.add_stat("Custom Button children NO. ", $CustomButtons, "get_child_count", true)
+	overlay.add_stat("Custom Button children NO. ", $CustomButtons, "get_child_count", true)
 #	overlay.add_stat("Line2d Count ", $Line2D, "get_point_count", true)
 	
 #	overlay.add_stat("ON BUTTONS 1 ", $CustomButtons/TextureButton, "mouseover", false)

@@ -11,7 +11,7 @@ var gameArea
 onready var cookie_input = get_parent().get_parent().get_node("cookie_input")
 
 
-var TextureGridTextTscn = preload("res://scenes/TextureGridText.tscn")
+var TextureGridTextTscn = preload("res://scenes/gridMap_n_text/TextureGridText.tscn")
 
 
 var layout
@@ -48,9 +48,7 @@ func _ready():
 	var start_full = float(OS.get_unix_time())
 	
 #	var layout = Crossword.new(13, 13, '-', 5000, word_list)
-	print("compute crossword() started")
-	layout.compute_crossword(2)
-	print("compute crossword finished")
+	layout.compute_crossword(0)
 	print (layout.word_bank())
 	print (layout.solution())
 	#print (layout.word_find())
@@ -62,7 +60,7 @@ func _ready():
 	print (layout.debug)
 	
 	var end_full = float(OS.get_unix_time())
-	print ("time: ", end_full - start_full)
+#	print ("time: ", end_full - start_full)
 #---------------------------------
 
 	clear()
@@ -85,8 +83,6 @@ func _ready():
 	var temp_postion = self.position
 	$Tween.interpolate_property(self, "position", Vector2(200, 0) + temp_postion, temp_postion, 1.2, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
 	$Tween.start()
-	print(self.get_child_count())
-	print(self.get_children())
 	
 func _on_cookie_input_word_drag_stop():
 #	check if we guessed a correct word from the input json var
@@ -137,13 +133,12 @@ func _on_cookie_input_word_drag_stop():
 								
 								Vector2((self.map_to_world(Vector2(k + l, j)) + self.cell_size/2)  
 								- (texture_grid_text.get_rect().size / 2) 
-								+ Vector2(0,text_y_offset)),
+								+ Vector2(0,0)), # ,text_y_offset)),
 								
 								0.6, Tween.TRANS_BACK, Tween.EASE_IN_OUT, 0.08*l)
 #								0.5, Tween.TRANS_BACK, Tween.EASE_OUT, 0.08*l)
 
 								add_child(texture_grid_text)
-								print(self.get_child_count())
 								$Tween.start()
 								
 								
@@ -170,13 +165,12 @@ func _on_cookie_input_word_drag_stop():
 								
 								Vector2((self.map_to_world(Vector2(k, j + l)) + self.cell_size/2)  
 								- (texture_grid_text.get_rect().size / 2) 
-								+ Vector2(0,text_y_offset)),
+								+ Vector2(0,0)), # ,text_y_offset)),
 								
 								0.6, Tween.TRANS_BACK, Tween.EASE_IN_OUT, 0.08*l)
 								
 								
 								add_child(texture_grid_text)
-								print(self.get_child_count())
 								$Tween.start()
 								
 							pass

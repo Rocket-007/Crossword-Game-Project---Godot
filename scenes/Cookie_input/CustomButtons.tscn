@@ -25,19 +25,7 @@ __meta__ = {
 }
 
 [node name="TextureButton7" parent="." instance=ExtResource( 4 )]
-margin_left = 15.0
-margin_top = 13.0
-margin_right = 79.0
-margin_bottom = 77.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureButton8" parent="." instance=ExtResource( 4 )]
-margin_left = -75.0
-margin_top = 13.0
-margin_right = -11.0
-margin_bottom = 77.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = -33.0
+margin_top = 21.0
+margin_right = 31.0
+margin_bottom = 85.0

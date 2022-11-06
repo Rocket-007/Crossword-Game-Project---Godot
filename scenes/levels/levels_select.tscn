@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/levels/levels_select.gd" type="Script" id=1]
+[ext_resource path="res://scenes/levels/levelButton.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 11.0
+content_margin_right = 11.0
+bg_color = Color( 0.980392, 0.505882, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.662745, 0.4, 0.109804, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.662745, 0.4, 0.109804, 1 )
+
+[node name="level_select" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 10.0
+color = Color( 0.980392, 0.505882, 0, 0.180392 )
+
+[node name="MenuButton" type="MenuButton" parent="."]
+margin_left = 83.0
+margin_top = 61.0
+margin_right = 95.0
+margin_bottom = 81.0
+
+[node name="Popup" type="Popup" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -48.0
+margin_right = 193.0
+margin_bottom = 262.0
+mouse_filter = 2
+
+[node name="Button" parent="Popup" instance=ExtResource( 2 )]
+margin_left = -47.0
+margin_top = 229.0
+margin_right = 142.0
+margin_bottom = 362.0
+
+[node name="VSlider" type="VSlider" parent="."]
+anchor_left = 0.994
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -26.68
+margin_top = 1166.0
+margin_right = 55.176
+margin_bottom = 970.0
+rect_rotation = -180.0
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 3 )
+custom_styles/grabber_area = SubResource( 2 )
+min_value = 1.0
+value = 1.0
+rounded = true
