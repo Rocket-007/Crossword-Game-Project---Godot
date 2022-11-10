@@ -33,7 +33,7 @@ func _ready():
 	
 	var count = combinator_array.size()
 #	var count = 5#button_number
-	var radius = Vector2(100,0)
+	var radius = Vector2(130,0)
 	var center = self.position
 	
 	var step = 2 * PI / count

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scripts/gameArea.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Cookie_input/Label.tscn" type="PackedScene" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://scripts/WordTileMap.gd" type="Script" id=6]
 [ext_resource path="res://scripts/crossword_gen_remake.gd" type="Script" id=7]
 [ext_resource path="res://imgs/robo_idle.png" type="Texture" id=8]
+[ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=9]
+[ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=10]
+[ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=11]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 8 )
@@ -85,6 +88,32 @@ animations = [ {
 "speed": 4.0
 } ]
 
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0, 0, 0, 0.505882 )
+border_width_top = 20
+border_width_bottom = 20
+border_color = Color( 0, 0, 0, 0.654902 )
+corner_radius_top_left = 85
+corner_radius_top_right = 85
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 20
+
+[sub_resource type="DynamicFont" id=20]
+size = 46
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=21]
+size = 34
+font_data = ExtResource( 11 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="DynamicFont" id=23]
+size = 46
+font_data = ExtResource( 11 )
+
 [node name="gameArea" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -98,7 +127,10 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 10.0
-color = Color( 0.980392, 0.505882, 0, 1 )
+color = Color( 0, 0.992157, 0.341176, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="crossword_generator2_remake" type="Node2D" parent="."]
 script = ExtResource( 7 )
@@ -106,18 +138,33 @@ script = ExtResource( 7 )
 [node name="union_combinator" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
+[node name="cookie_input" parent="." instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -249.0
+margin_right = -2.0
+margin_bottom = -249.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween2" type="Tween" parent="cookie_input"]
+
 [node name="ControTileMap" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="WordTileMap" type="TileMap" parent="ControTileMap"]
 self_modulate = Color( 0.444946, 0.196597, 0.0316655, 1 )
-position = Vector2( 396, 9 )
-scale = Vector2( 0.57, 0.57 )
-z_index = 4
+position = Vector2( 172, 189 )
+scale = Vector2( 0.8, 0.8 )
 tile_set = ExtResource( 4 )
 format = 1
 tile_data = PoolIntArray( 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 65537, 0, 0, 65542, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 262145, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 327681, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0 )
@@ -125,23 +172,11 @@ script = ExtResource( 6 )
 
 [node name="Tween" type="Tween" parent="ControTileMap/WordTileMap"]
 
-[node name="cookie_input" parent="." instance=ExtResource( 5 )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 0.0
-margin_top = -147.0
-margin_right = 0.0
-margin_bottom = -147.0
-
-[node name="Tween2" type="Tween" parent="cookie_input"]
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 227, 424 )
+position = Vector2( 84, 621 )
 scale = Vector2( 3.31762, 3.31762 )
 frames = SubResource( 18 )
-frame = 2
+frame = 5
 playing = true
 
 [node name="Label" parent="." instance=ExtResource( 2 )]
@@ -150,5 +185,67 @@ margin_top = 138.0
 margin_right = 281.0
 margin_bottom = 173.0
 text = "level:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = -161.5
+margin_right = 64.0
+margin_bottom = 155.5
+custom_styles/panel = SubResource( 19 )
+
+[node name="Button" type="Button" parent="Panel"]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
+margin_right = 12.0
+custom_fonts/font = SubResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nextLevel" type="Button" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -123.0
+margin_top = -175.0
+margin_right = 125.0
+margin_bottom = -53.0
+custom_fonts/font = SubResource( 21 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = SubResource( 22 )
+custom_styles/normal = ExtResource( 9 )
+text = "NEXT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -297.0
+margin_top = 43.0
+margin_right = 301.0
+margin_bottom = 99.0
+custom_fonts/font = SubResource( 23 )
+text = "LEVEL CLEARED"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Panel"]
 
 [connection signal="word_drag_stop" from="cookie_input" to="ControTileMap/WordTileMap" method="_on_cookie_input_word_drag_stop"]
+[connection signal="level_completed" from="ControTileMap/WordTileMap" to="." method="_on_WordTileMap_level_completed"]
+[connection signal="pressed" from="Panel/nextLevel" to="." method="_on_nextLevel_pressed"]

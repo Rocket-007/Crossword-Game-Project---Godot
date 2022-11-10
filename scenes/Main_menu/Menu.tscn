@@ -1,7 +1,9 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/Main_menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=3]
+[ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://Peach Days.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=5]
@@ -62,8 +64,13 @@ animations = [ {
 } ]
 
 [sub_resource type="DynamicFont" id=7]
-size = 40
+size = 32
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="DynamicFont" id=25]
 font_data = ExtResource( 5 )
@@ -86,11 +93,14 @@ font_data = ExtResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.980392, 0.505882, 0, 1 )
+color = Color( 0, 0.992157, 0.341176, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -98,9 +108,9 @@ __meta__ = {
 [node name="ColorRect2" type="TextureRect" parent="."]
 visible = false
 material = SubResource( 5 )
-margin_left = 623.0
+margin_left = 656.0
 margin_top = 868.0
-margin_right = 1057.0
+margin_right = 1090.0
 margin_bottom = 1532.0
 rect_rotation = 89.9999
 mouse_filter = 2
@@ -132,34 +142,52 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -144.0
-margin_top = -625.0
-margin_right = 144.0
+margin_left = -155.0
+margin_top = -450.0
+margin_right = 155.0
+margin_bottom = -82.0
+rect_pivot_offset = Vector2( 150, 170 )
 
 [node name="Button" type="Button" parent="VBoxContainer"]
-margin_right = 292.0
+margin_right = 310.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 0, 120 )
 focus_neighbour_top = NodePath("../Button3")
 custom_fonts/font = SubResource( 7 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = SubResource( 26 )
+custom_styles/normal = ExtResource( 3 )
 text = "PLAY"
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
 margin_top = 124.0
-margin_right = 292.0
+margin_right = 310.0
 margin_bottom = 244.0
 rect_min_size = Vector2( 0, 120 )
 custom_fonts/font = SubResource( 7 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = SubResource( 26 )
+custom_styles/normal = ExtResource( 3 )
 text = "OPTIONS"
 
 [node name="Button3" type="Button" parent="VBoxContainer"]
 margin_top = 248.0
-margin_right = 292.0
+margin_right = 310.0
 margin_bottom = 368.0
 rect_min_size = Vector2( 0, 120 )
 focus_neighbour_bottom = NodePath("../Button")
 custom_fonts/font = SubResource( 7 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = SubResource( 26 )
+custom_styles/normal = ExtResource( 3 )
 text = "EXIT"
+
+[node name="Tween" type="Tween" parent="VBoxContainer"]
+
+[node name="Tween2" type="Tween" parent="VBoxContainer"]
 
 [node name="SocialButt" type="VBoxContainer" parent="."]
 visible = false
@@ -209,7 +237,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="VBoxContainer2"]
-margin_right = 1024.0
+margin_right = 720.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 theme = SubResource( 1 )
@@ -309,6 +337,8 @@ valign = 1
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="tween_completed" from="VBoxContainer/Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="tween_completed" from="VBoxContainer/Tween2" to="." method="_on_Tween2_tween_completed"]
 [connection signal="pressed" from="SocialButt/HBoxContainer/socialB" to="." method="_on_socialB_pressed"]
 [connection signal="pressed" from="SocialButt/HBoxContainer/socialB2" to="." method="_on_socialB2_pressed"]
 [connection signal="pressed" from="SocialButt/HBoxContainer/socialB3" to="." method="_on_socialB3_pressed"]

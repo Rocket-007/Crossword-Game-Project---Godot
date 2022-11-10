@@ -1,9 +1,7 @@
 extends TileMap
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+signal level_completed
 
 var gameArea
 
@@ -27,6 +25,14 @@ func _ready():
 		if v.size() < 3:
 			v.append(false)
 	
+#	load the solved? data of the selected level
+	var index = GlobalState.configFile.get_value("Level_Index","index")
+	if GlobalState.configFile.has_section("Level_Words"):
+		for v in GlobalState.configFile.get_section_keys("Level_Words"):
+			for q in gameArea.input_json:
+				if q[0] == v:
+					q[2] = GlobalState.configFile.get_value("Level_Words", v)
+	
 	
 #	this was for the old generator
 #	var layout = gameArea.get_node("crossword_generator").generateLayout(gameArea.input_json)
@@ -49,7 +55,7 @@ func _ready():
 	
 #	var layout = Crossword.new(13, 13, '-', 5000, word_list)
 	layout.compute_crossword(0)
-	print (layout.word_bank())
+#	print (layout.word_bank())
 	print (layout.solution())
 	#print (layout.word_find())
 	layout.display()
@@ -93,15 +99,19 @@ func _on_cookie_input_word_drag_stop():
 #			find the word in the layout class word list and
 #			place the words in the correct position
 			for word in layout.current_word_list:
-				if word.word == gameArea.input_json[i][0]:
+				if word.word == gameArea.input_json[i][0] and !word.solved:
 					word.solved = true
+					
+#					save solved word
+					GlobalState.configFile.set_value("Level_Words",word.word,true)
+					GlobalState.configFile.save(GlobalState.file_to_save)
 					
 					var j = word.row - 1
 					var k = word.col - 1
 					if layout.grid[j][k] != "-":
 #						need some variables
 						var text_font_size = 35
-						var text_x_offset = 50
+						var text_x_offset = 50 #* self.scale.x
 						var text_y_offset = -35
 #						first check if the word is across
 						if word.down_across() == "across":
@@ -175,6 +185,18 @@ func _on_cookie_input_word_drag_stop():
 								
 							pass
 
+
+#	finally check if we completed all words in the level
+	var count = 0
+	for word in layout.current_word_list:
+		if word.solved:
+			count += 1
+			print("count ", count)
+		else:
+			count = 0
+			break
+		if count == gameArea.input_json.size():
+			emit_signal("level_completed")
 
 func ready_draw_gridWords():
 #	for i in range(gameArea.input_json.size()):

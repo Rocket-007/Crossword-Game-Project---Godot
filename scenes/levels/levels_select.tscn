@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/levels/levels_select.gd" type="Script" id=1]
 [ext_resource path="res://scenes/levels/levelButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 11.0
@@ -14,6 +15,12 @@ bg_color = Color( 0.662745, 0.4, 0.109804, 1 )
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.662745, 0.4, 0.109804, 1 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 26
+outline_size = 3
+outline_color = Color( 0, 0.247059, 0.0509804, 1 )
+font_data = ExtResource( 3 )
+
 [node name="level_select" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,10 +30,11 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 10.0
-color = Color( 0.980392, 0.505882, 0, 0.180392 )
+color = Color( 0, 0.992157, 0.341176, 1 )
 
 [node name="MenuButton" type="MenuButton" parent="."]
 margin_left = 83.0
@@ -45,9 +53,9 @@ mouse_filter = 2
 
 [node name="Button" parent="Popup" instance=ExtResource( 2 )]
 margin_left = -47.0
-margin_top = 229.0
+margin_top = 425.0
 margin_right = 142.0
-margin_bottom = 362.0
+margin_bottom = 558.0
 
 [node name="VSlider" type="VSlider" parent="."]
 anchor_left = 0.994
@@ -64,3 +72,15 @@ custom_styles/grabber_area = SubResource( 2 )
 min_value = 1.0
 value = 1.0
 rounded = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 18.0
+margin_right = 322.0
+margin_bottom = 44.0
+custom_fonts/font = SubResource( 4 )
+text = "SELECT LEVEL"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

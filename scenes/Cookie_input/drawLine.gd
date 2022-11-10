@@ -7,6 +7,8 @@ signal word_drag_stop
 
 var delete_all_line_flag = true
 
+var hasExec = false
+
 #onready var combinator_array = get_parent().combinator_array
 onready var combinator_array = get_parent().get_node("union_combinator").combinator_array
 
@@ -108,14 +110,21 @@ func lineFunction():
 #			this will be the last line point that will be following the mouse
 #			$Line2D.set_point_position($Line2D.get_point_count()-1,get_global_mouse_position())
 			$Line2D.set_point_position($Line2D.get_point_count()-1,get_local_mouse_position())
+		
+#		at first the else body was executing every frame cause of the condition of touching = false
+#		this is important to make the else section only run ONCE we stop  touching any button 
+		hasExec = false
 	else:
-#		if you release the mouse and flag = true, the whole line2D is cleared
-		if delete_all_line_flag:
-			$Line2D.clear_points()
-#		finally to clear the word dragged array if we release the mouse button
-		emit_signal("word_drag_stop")
-		$CustomButtons.word_dragged.clear()
-			
+#		check if we have already run this code 
+		if !hasExec:
+	#		if you release the mouse and flag = true, the whole line2D is cleared
+			if delete_all_line_flag:
+				$Line2D.clear_points()
+	#		finally to clear the word dragged array if we release the mouse button
+			emit_signal("word_drag_stop")
+			$CustomButtons.word_dragged.clear()
+			hasExec = true
+				
 #	this is to make sure that the word_dragged array size is not exceeded
 	if $CustomButtons.word_dragged.size() <= $CustomButtons.get_child_count():
 		pass
