@@ -93,9 +93,6 @@ font_data = ExtResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -125,7 +122,7 @@ position = Vector2( 410, 270 )
 rotation = -0.220358
 scale = Vector2( 5.13281, 5.13281 )
 frames = SubResource( 22 )
-frame = 9
+frame = 12
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
@@ -134,24 +131,28 @@ position = Vector2( 60, 1054 )
 rotation = 0.0422393
 scale = Vector2( -5.04154, 5.13281 )
 frames = SubResource( 22 )
-frame = 6
+frame = 9
 playing = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="Control" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -155.0
-margin_top = -450.0
+margin_top = -484.0
 margin_right = 155.0
-margin_bottom = -82.0
 rect_pivot_offset = Vector2( 150, 170 )
+
+[node name="Tween" type="Tween" parent="VBoxContainer"]
+
+[node name="Tween2" type="Tween" parent="VBoxContainer"]
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 margin_right = 310.0
-margin_bottom = 120.0
+margin_bottom = 72.0
 rect_min_size = Vector2( 0, 120 )
+rect_pivot_offset = Vector2( 155, 60 )
 focus_neighbour_top = NodePath("../Button3")
 custom_fonts/font = SubResource( 7 )
 custom_styles/hover = ExtResource( 3 )
@@ -161,10 +162,11 @@ custom_styles/normal = ExtResource( 3 )
 text = "PLAY"
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
-margin_top = 124.0
+margin_top = 164.0
 margin_right = 310.0
-margin_bottom = 244.0
+margin_bottom = 284.0
 rect_min_size = Vector2( 0, 120 )
+rect_pivot_offset = Vector2( 155, 60 )
 custom_fonts/font = SubResource( 7 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 4 )
@@ -173,10 +175,11 @@ custom_styles/normal = ExtResource( 3 )
 text = "OPTIONS"
 
 [node name="Button3" type="Button" parent="VBoxContainer"]
-margin_top = 248.0
+margin_top = 330.0
 margin_right = 310.0
-margin_bottom = 368.0
+margin_bottom = 450.0
 rect_min_size = Vector2( 0, 120 )
+rect_pivot_offset = Vector2( 155, 60 )
 focus_neighbour_bottom = NodePath("../Button")
 custom_fonts/font = SubResource( 7 )
 custom_styles/hover = ExtResource( 3 )
@@ -184,10 +187,6 @@ custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = SubResource( 26 )
 custom_styles/normal = ExtResource( 3 )
 text = "EXIT"
-
-[node name="Tween" type="Tween" parent="VBoxContainer"]
-
-[node name="Tween2" type="Tween" parent="VBoxContainer"]
 
 [node name="SocialButt" type="VBoxContainer" parent="."]
 visible = false
@@ -334,11 +333,11 @@ valign = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
+[connection signal="tween_completed" from="VBoxContainer/Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="tween_completed" from="VBoxContainer/Tween2" to="." method="_on_Tween2_tween_completed"]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_Button3_pressed"]
-[connection signal="tween_completed" from="VBoxContainer/Tween" to="." method="_on_Tween_tween_completed"]
-[connection signal="tween_completed" from="VBoxContainer/Tween2" to="." method="_on_Tween2_tween_completed"]
 [connection signal="pressed" from="SocialButt/HBoxContainer/socialB" to="." method="_on_socialB_pressed"]
 [connection signal="pressed" from="SocialButt/HBoxContainer/socialB2" to="." method="_on_socialB2_pressed"]
 [connection signal="pressed" from="SocialButt/HBoxContainer/socialB3" to="." method="_on_socialB3_pressed"]

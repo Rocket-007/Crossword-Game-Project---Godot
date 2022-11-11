@@ -87,5 +87,5 @@ func _process(delta):
 #	when the first button is pressed down
 	if get_parent().Touching:
 		pass
-	checkHover()
-	
+		checkHover()
+#	

@@ -77,15 +77,19 @@ func _ready():
 		
 #		btw you are supposed to set the positoin after instancing i think
 #		v.add_child(node_container)
+#		label.rect_global_position = v.rect_position
 		label.rect_global_position = v.get_global_rect().get_center()
 		
 #		this is to text align enum to 0 = left (because center isnt to good for a char)
 		label.align = 0
 		
+#		ran int0 problems on polishing the game: if i size the button instance
+#		the label does not center, this seems to fix that
+		var instance_button_size = v.rect_size
 #		these will off set the label so the character appears in the middle of the button center
 #		instead of just the top left edge touching em 
-		label.margin_left = 16
-		label.margin_top = 16
+		label.margin_left = (instance_button_size.x/2) - 16
+		label.margin_top = (instance_button_size.y/2) - 16
 		
 		label.text = v.letter
 #		label.text = combinator_array[get_children().find(v)]

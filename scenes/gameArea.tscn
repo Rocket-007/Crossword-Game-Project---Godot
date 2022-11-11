@@ -157,9 +157,6 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="WordTileMap" type="TileMap" parent="ControTileMap"]
 self_modulate = Color( 0.444946, 0.196597, 0.0316655, 1 )
@@ -176,7 +173,7 @@ script = ExtResource( 6 )
 position = Vector2( 84, 621 )
 scale = Vector2( 3.31762, 3.31762 )
 frames = SubResource( 18 )
-frame = 5
+frame = 10
 playing = true
 
 [node name="Label" parent="." instance=ExtResource( 2 )]
@@ -216,10 +213,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -123.0
-margin_top = -175.0
-margin_right = 125.0
-margin_bottom = -53.0
+margin_left = -154.0
+margin_top = -181.0
+margin_right = 156.0
+margin_bottom = -38.0
 custom_fonts/font = SubResource( 21 )
 custom_styles/hover = ExtResource( 9 )
 custom_styles/pressed = ExtResource( 10 )

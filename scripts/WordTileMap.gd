@@ -2,6 +2,8 @@ extends TileMap
 
 
 signal level_completed
+signal game_passed
+
 
 var gameArea
 
@@ -197,6 +199,9 @@ func _on_cookie_input_word_drag_stop():
 			break
 		if count == gameArea.input_json.size():
 			emit_signal("level_completed")
+		elif count == gameArea.input_json.size() and false:
+			emit_signal("game_passed")
+			
 
 func ready_draw_gridWords():
 #	for i in range(gameArea.input_json.size()):

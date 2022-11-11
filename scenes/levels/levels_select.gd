@@ -61,6 +61,45 @@ func gen_level_grids():
 		pass
 
 
+
+func expand_menuButton():
+	var active_button
+	var temp_postion
+	var temp_scale
+	var temp_color
+
+	active_button = $Popup.get_child(GlobalState.level_index)
+	temp_postion = active_button.rect_position
+	temp_scale = active_button.rect_scale
+	temp_color =active_button.modulate
+	
+	$Tween.remove(active_button)
+	
+	$Tween.interpolate_property(active_button, "modulate", temp_color,Color(1,1,1,0.4), 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(active_button, "rect_scale", temp_scale,Vector2(1.2,1.2), 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	
+	$Tween.start()
+
+func shrink_menuButton():
+	var active_button
+	var temp_postion
+	var temp_scale
+	var temp_color
+	
+	active_button = $Popup.get_child(GlobalState.level_index)
+	temp_postion = active_button.rect_position
+	temp_scale = active_button.rect_scale
+	temp_color = active_button.modulate
+
+	$Tween.remove(active_button)
+
+	$Tween2.interpolate_property(active_button, "modulate", temp_color,Color(1,1,1,1), 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween2.interpolate_property(active_button, "rect_scale", temp_scale, Vector2(0.9,0.9), 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#
+	$Tween2.start()
+
+
+
 func set_slider(the_slide):
 #	for some reasons leaving the slider at 100 does not work well
 #	so have to use the size of a button + the paddings 
@@ -96,6 +135,8 @@ func _ready():
 	$Popup.get_child(GlobalState.level_index).mouse_filter = Control.MOUSE_FILTER_STOP
 
 
+#	expand animation
+	expand_menuButton()
 
 
 
@@ -163,7 +204,13 @@ func _notification(what):
 
 
 
+func _on_Tween_tween_completed(object, key):
+	 shrink_menuButton()
 
+
+
+func _on_Tween2_tween_completed(object, key):
+	 expand_menuButton()
 
 
 

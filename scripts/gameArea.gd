@@ -5,7 +5,7 @@ extends Control
 var input_json = GlobalState.input_json
 
 
-signal level_passed
+
 
 onready var word_tile_map = $ControTileMap/WordTileMap
 onready var crossword_gen = $crossword_generator2_remake
@@ -36,7 +36,7 @@ func _process(delta):
 
 func _input(event):
 	if event.is_action_pressed("ui_right"):
-		emit_signal("level_passed")
+		pass
 
 	if event is InputEventKey and event.scancode == KEY_Q:# and not event.echo:
 		get_tree().quit()

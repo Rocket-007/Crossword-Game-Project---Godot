@@ -58,6 +58,7 @@ margin_right = 142.0
 margin_bottom = 558.0
 
 [node name="VSlider" type="VSlider" parent="."]
+modulate = Color( 1, 1, 1, 0.647059 )
 anchor_left = 0.994
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -81,6 +82,10 @@ margin_bottom = 44.0
 custom_fonts/font = SubResource( 4 )
 text = "SELECT LEVEL"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Tween2" type="Tween" parent="."]
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="tween_completed" from="Tween2" to="." method="_on_Tween2_tween_completed"]
