@@ -27,6 +27,8 @@ var configFile = ConfigFile.new()
 func delete_old_save():
 	for v in configFile.get_section_keys("Level_Words"):
 		configFile.erase_section_key("Level_Words", v)
+		print("cleared save ", v)
+	configFile.save(file_to_save)
 
 
 
@@ -67,12 +69,12 @@ func createSave():
 
 
 func load_level(level): # funciton has the job of changing the crossword input and scene
-	if level > Levels.levels_json.size():
-		print("exceeded")
-		return
+#	if level > Levels.levels_json.size():
+#		print("exceeded")
+#		return
 	input_json = Levels.levels_json[level-1]
 	get_tree().change_scene("res://scenes/gameArea.tscn")
-		
+	
 
 
 func _ready():

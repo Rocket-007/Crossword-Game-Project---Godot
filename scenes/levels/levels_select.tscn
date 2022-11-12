@@ -44,18 +44,19 @@ margin_bottom = 81.0
 
 [node name="Popup" type="Popup" parent="."]
 visible = true
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -48.0
-margin_right = 193.0
-margin_bottom = 262.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="Button" parent="Popup" instance=ExtResource( 2 )]
-margin_left = -47.0
-margin_top = 425.0
-margin_right = 142.0
-margin_bottom = 558.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -94.5
+margin_top = -330.5
+margin_right = 94.5
+margin_bottom = -197.5
 
 [node name="VSlider" type="VSlider" parent="."]
 modulate = Color( 1, 1, 1, 0.647059 )

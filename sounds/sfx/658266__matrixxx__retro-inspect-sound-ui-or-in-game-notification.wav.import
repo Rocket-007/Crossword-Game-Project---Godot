@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/658266__matrixxx__retro-inspect-sound-ui-or-in-game-notification.wav-6d7fcf6e38c6eb7645ce17236ba04ac5.sample"
+
+[deps]
+
+source_file="res://sounds/sfx/658266__matrixxx__retro-inspect-sound-ui-or-in-game-notification.wav"
+dest_files=[ "res://.import/658266__matrixxx__retro-inspect-sound-ui-or-in-game-notification.wav-6d7fcf6e38c6eb7645ce17236ba04ac5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/478197__jonnyruss01__click-1.wav-1ce3b244e7768473bac1cd2cb972220c.sample"
+
+[deps]
+
+source_file="res://sounds/sfx/478197__jonnyruss01__click-1.wav"
+dest_files=[ "res://.import/478197__jonnyruss01__click-1.wav-1ce3b244e7768473bac1cd2cb972220c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

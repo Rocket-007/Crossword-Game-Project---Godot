@@ -14,7 +14,7 @@ onready var combinator_array = get_parent().get_node("union_combinator").combina
 
 func displayOverlayDebugging():
 	var overlay = load("res://scenes/Cookie_input/debug_overlay.tscn").instance()
-	overlay.add_stat("Custom Button children NO. ", $CustomButtons, "get_child_count", true)
+#	overlay.add_stat("Custom Button children NO. ", $CustomButtons, "get_child_count", true)
 #	overlay.add_stat("Line2d Count ", $Line2D, "get_point_count", true)
 	
 #	overlay.add_stat("ON BUTTONS 1 ", $CustomButtons/TextureButton, "mouseover", false)
@@ -40,7 +40,7 @@ func displayOverlayDebugging():
 #
 #	overlay.add_stat("", "", "", false)
 	
-	overlay.add_stat("word_dragged", $CustomButtons, "word_dragged", false)
+#	overlay.add_stat("word_dragged", $CustomButtons, "word_dragged", false)
 	
 	add_child(overlay)
 	
@@ -155,5 +155,10 @@ func _draw():
 func _process(delta):
 	lineFunction()
 	outputWord()
+	
+	$Sprite3.rotation_degrees -= 50*delta
+	$Sprite2.rotation_degrees -= 30*delta
+	$Sprite.rotation_degrees += 20*delta
+	
 	update()
 	

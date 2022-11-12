@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/657945__matrixxx__scifi-inspect-sound-ui-or-in-game-notification-01.wav-85bb435a0afb886ec952a4e2ff29e4dd.sample"
+
+[deps]
+
+source_file="res://sounds/sfx/657945__matrixxx__scifi-inspect-sound-ui-or-in-game-notification-01.wav"
+dest_files=[ "res://.import/657945__matrixxx__scifi-inspect-sound-ui-or-in-game-notification-01.wav-85bb435a0afb886ec952a4e2ff29e4dd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

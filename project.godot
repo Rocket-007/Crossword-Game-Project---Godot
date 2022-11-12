@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Cross Word Game"
-run/main_scene="res://scenes/levels/levels_select.tscn"
+run/main_scene="res://scenes/Main_menu/Menu.tscn"
 config/icon="res://icon.png"
 config/quit_on_go_back=false
 

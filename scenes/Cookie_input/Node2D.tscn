@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Cookie_input/Label.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Cookie_input/drawLine.gd" type="Script" id=2]
-[ext_resource path="res://imgs/Untitled34_20221019144542.png" type="Texture" id=3]
+[ext_resource path="res://imgs/Untitled175_20221111173512.png" type="Texture" id=3]
 [ext_resource path="res://scenes/Cookie_input/CustomButtons.tscn" type="PackedScene" id=4]
+[ext_resource path="res://imgs/flame_particle_32.png" type="Texture" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.223529, 0.388235, 0.717647, 1 )
+colors = PoolColorArray( 1, 0.918919, 0, 0, 1, 0.916077, 0, 1, 1, 0.0981511, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0 )
 
 [node name="Cookie_input" type="Control"]
 margin_left = 558.0
@@ -12,10 +19,37 @@ margin_right = 558.0
 margin_bottom = 411.0
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.866667 )
+[node name="Particles2D" type="CPUParticles2D" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.956863 )
+material = SubResource( 1 )
+position = Vector2( -5, 8 )
+amount = 70
+lifetime_randomness = 0.56
+local_coords = false
+texture = ExtResource( 5 )
+direction = Vector2( 0, -1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 247.95
+color_ramp = SubResource( 2 )
+
+[node name="Sprite3" type="Sprite" parent="."]
 show_behind_parent = true
-scale = Vector2( 2.07, 2.07 )
+position = Vector2( -137, 162 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 187.5, 4.5 )
+scale = Vector2( 0.408333, 0.408333 )
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.92549 )
+show_behind_parent = true
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 3 )
 
 [node name="CustomButtons" parent="." instance=ExtResource( 4 )]

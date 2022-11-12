@@ -19,7 +19,7 @@ func _ready():
 	
 #	animate cookie input
 	temp_postion = $cookie_input.rect_position
-	$cookie_input/Tween2.interpolate_property($cookie_input, "rect_position", Vector2(0, 120) + temp_postion, temp_postion, 1.0, Tween.TRANS_BACK, Tween.EASE_OUT)
+	$cookie_input/Tween2.interpolate_property($cookie_input, "rect_position", Vector2(0, 220) + temp_postion, temp_postion, 1.0, Tween.TRANS_BACK, Tween.EASE_OUT)
 	$cookie_input/Tween2.start()
 
 
@@ -74,9 +74,17 @@ func _on_WordTileMap_level_completed():
 
 
 func _on_nextLevel_pressed():
-	if GlobalState.level_index > Levels.levels_json.size():
-		print("exceeded")
-		return
-	var next_level = GlobalState.level_index + 2
-	GlobalState.level_index = next_level - 1
-	GlobalState.load_level(next_level)
+	if GlobalState.level_index+1 < Levels.levels_json.size():
+
+		
+		
+		var next_level = GlobalState.level_index + 2
+		GlobalState.level_index = next_level - 1
+		GlobalState.load_level(next_level)
+
+
+		GlobalState.delete_old_save()
+		
+		GlobalState.configFile.set_value("Level_Index","index",GlobalState.level_index)
+		GlobalState.configFile.save(GlobalState.file_to_save)
+

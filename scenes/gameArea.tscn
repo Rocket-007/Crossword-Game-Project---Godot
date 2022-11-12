@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scripts/gameArea.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Cookie_input/Label.tscn" type="PackedScene" id=2]
@@ -11,6 +11,20 @@
 [ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=9]
 [ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=10]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://imgs/flame_particle_32.png" type="Texture" id=12]
+
+[sub_resource type="CanvasItemMaterial" id=24]
+
+[sub_resource type="Gradient" id=25]
+offsets = PoolRealArray( 0, 0.223529, 0.388235, 0.717647, 1 )
+colors = PoolColorArray( 1, 0.918919, 0, 0, 1, 0.916077, 0, 1, 1, 0.0981511, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0 )
+
+[sub_resource type="CanvasItemMaterial" id=26]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=27]
+offsets = PoolRealArray( 0, 0.264706, 0.541176, 0.776471, 0.988235, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 8 )
@@ -119,24 +133,32 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -7.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 10.0
-color = Color( 0, 0.992157, 0.341176, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color( 0.0429206, 0.711212, 0.272728, 1 )
 
 [node name="crossword_generator2_remake" type="Node2D" parent="."]
 script = ExtResource( 7 )
 
 [node name="union_combinator" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="Particles2D" type="CPUParticles2D" parent="."]
+visible = false
+material = SubResource( 24 )
+position = Vector2( 358, 1014 )
+amount = 70
+lifetime_randomness = 0.56
+local_coords = false
+texture = ExtResource( 12 )
+direction = Vector2( 0, -1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 247.95
+color_ramp = SubResource( 25 )
 
 [node name="cookie_input" parent="." instance=ExtResource( 5 )]
 anchor_left = 0.5
@@ -147,9 +169,6 @@ margin_left = -2.0
 margin_top = -249.0
 margin_right = -2.0
 margin_bottom = -249.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Tween2" type="Tween" parent="cookie_input"]
 
@@ -169,11 +188,30 @@ script = ExtResource( 6 )
 
 [node name="Tween" type="Tween" parent="ControTileMap/WordTileMap"]
 
+[node name="Particles2D2" type="CPUParticles2D" parent="ControTileMap/WordTileMap"]
+material = SubResource( 26 )
+position = Vector2( 98.75, 40 )
+scale = Vector2( 1.25, 1.25 )
+emitting = false
+amount = 28
+lifetime = 0.9
+one_shot = true
+explosiveness = 0.85
+lifetime_randomness = 0.63
+texture = ExtResource( 12 )
+direction = Vector2( 0, -1 )
+spread = 166.95
+gravity = Vector2( 0, 2500 )
+initial_velocity = 576.43
+color_ramp = SubResource( 27 )
+hue_variation = -0.18
+hue_variation_random = 0.6
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 84, 621 )
+position = Vector2( 88, 619 )
 scale = Vector2( 3.31762, 3.31762 )
 frames = SubResource( 18 )
-frame = 10
+frame = 11
 playing = true
 
 [node name="Label" parent="." instance=ExtResource( 2 )]
@@ -187,6 +225,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 anchor_top = 0.5
 anchor_right = 1.0
@@ -243,6 +282,23 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="Panel"]
 
+[node name="Particles_levelCOM1" type="CPUParticles2D" parent="Panel"]
+material = SubResource( 26 )
+position = Vector2( -57, 146 )
+scale = Vector2( 1.25, 1.25 )
+amount = 28
+lifetime = 7.91
+lifetime_randomness = 0.71
+texture = ExtResource( 12 )
+direction = Vector2( 45, -1 )
+spread = 24.72
+gravity = Vector2( 0, 0 )
+initial_velocity = 297.78
+color_ramp = SubResource( 27 )
+hue_variation = -0.18
+hue_variation_random = 0.6
+
 [connection signal="word_drag_stop" from="cookie_input" to="ControTileMap/WordTileMap" method="_on_cookie_input_word_drag_stop"]
 [connection signal="level_completed" from="ControTileMap/WordTileMap" to="." method="_on_WordTileMap_level_completed"]
+[connection signal="tween_completed" from="ControTileMap/WordTileMap/Tween" to="ControTileMap/WordTileMap" method="_on_Tween_tween_completed"]
 [connection signal="pressed" from="Panel/nextLevel" to="." method="_on_nextLevel_pressed"]

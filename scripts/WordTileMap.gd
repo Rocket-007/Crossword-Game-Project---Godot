@@ -5,7 +5,7 @@ signal level_completed
 signal game_passed
 
 
-var gameArea
+onready var gameArea  = get_parent().get_parent()
 
 
 onready var cookie_input = get_parent().get_parent().get_node("cookie_input")
@@ -16,10 +16,11 @@ var TextureGridTextTscn = preload("res://scenes/gridMap_n_text/TextureGridText.t
 
 var layout
 
+var used_rect
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	gameArea = get_parent().get_parent()
+#	gameArea = get_parent().get_parent()
 	
 	for v in gameArea.input_json:
 		if v.size() < 2:
@@ -88,10 +89,17 @@ func _ready():
 #				add_child(texture_grid_text)
 	ready_draw_gridWords()
 	
-	var temp_postion = self.position
-	$Tween.interpolate_property(self, "position", Vector2(200, 0) + temp_postion, temp_postion, 1.2, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
-	$Tween.start()
 	
+#	we need to center the time map node to middle of its parent 
+#	because we can not control the layout position of a tile map node
+#	we get the used area * cellsize to get rect of the tile map is
+	used_rect = self.get_used_rect().size * self.cell_size
+#	print("usedv ", used_rect)
+
+	var temp_postion = self.position
+	$Tween.interpolate_property(self, "position", Vector2(0, 200) + temp_postion, temp_postion, 1.2, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
+	$Tween.start()
+
 func _on_cookie_input_word_drag_stop():
 #	check if we guessed a correct word from the input json var
 	for i in range(gameArea.input_json.size()):
@@ -101,12 +109,17 @@ func _on_cookie_input_word_drag_stop():
 #			find the word in the layout class word list and
 #			place the words in the correct position
 			for word in layout.current_word_list:
-				if word.word == gameArea.input_json[i][0] and !word.solved:
+				if word.word == gameArea.input_json[i][0] :#and !word.solved:
 					word.solved = true
 					
 #					save solved word
 					GlobalState.configFile.set_value("Level_Words",word.word,true)
 					GlobalState.configFile.save(GlobalState.file_to_save)
+					
+#					emit particles at first letter position
+					get_node("Particles2D2").position = Vector2(self.map_to_world(Vector2(word.col - 1, word.row - 1)) + self.cell_size/2)
+					get_node("Particles2D2").emitting = true
+					
 					
 					var j = word.row - 1
 					var k = word.col - 1
@@ -193,15 +206,20 @@ func _on_cookie_input_word_drag_stop():
 	for word in layout.current_word_list:
 		if word.solved:
 			count += 1
-			print("count ", count)
 		else:
 			count = 0
 			break
-		if count == gameArea.input_json.size():
-			emit_signal("level_completed")
-		elif count == gameArea.input_json.size() and false:
+		if count == gameArea.input_json.size() and GlobalState.level_index+1 == Levels.levels_json.size():
+			print("game completed")
 			emit_signal("game_passed")
-			
+		elif count == gameArea.input_json.size():
+			print("level completed")
+			print("Global level index ", GlobalState.level_index)
+			print("Level json ", Levels.levels_json.size())
+			emit_signal("level_completed")
+
+
+
 
 func ready_draw_gridWords():
 #	for i in range(gameArea.input_json.size()):
@@ -262,6 +280,9 @@ func ready_draw_gridWords():
 
 func _process(delta):
 	update()
+	
+	#	update the tilemap position accordingly to the center of its parent
+	self.position.x = (get_parent().get_rect().get_center().x - (used_rect.x/2))# / self.scale.x
 	pass
 
 
@@ -271,3 +292,7 @@ func _draw():
 #	- Vector2((cookie_input.get_node("Label").get_total_character_count()+1) * 35,0),
 #	10.0, Color.blueviolet)
 	pass
+
+
+func _on_Tween_tween_completed(object, key):
+	pass # Replace with function body.

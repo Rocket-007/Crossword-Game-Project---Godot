@@ -93,6 +93,9 @@ font_data = ExtResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -122,7 +125,7 @@ position = Vector2( 410, 270 )
 rotation = -0.220358
 scale = Vector2( 5.13281, 5.13281 )
 frames = SubResource( 22 )
-frame = 12
+frame = 2
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
@@ -131,7 +134,7 @@ position = Vector2( 60, 1054 )
 rotation = 0.0422393
 scale = Vector2( -5.04154, 5.13281 )
 frames = SubResource( 22 )
-frame = 9
+frame = 12
 playing = true
 
 [node name="VBoxContainer" type="Control" parent="."]
