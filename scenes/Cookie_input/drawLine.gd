@@ -7,7 +7,7 @@ signal word_drag_stop
 
 var delete_all_line_flag = true
 
-var hasExec = false
+var hasExec = true
 
 #onready var combinator_array = get_parent().combinator_array
 onready var combinator_array = get_parent().get_node("union_combinator").combinator_array

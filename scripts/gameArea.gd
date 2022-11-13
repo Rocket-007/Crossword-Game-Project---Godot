@@ -17,6 +17,9 @@ onready var combinator_array = $union_combinator.combinator_array
 
 func change_to_end_scene():
 	print("thanks for playing")
+	
+	#	change scene
+	get_tree().change_scene("res://scenes/end_screen/end_screen.tscn")
 	pass
 
 
@@ -108,5 +111,12 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_WordTileMap_game_passed():
+#	set the dimming color rect to cover mouse events
+	$ColorRect3.mouse_filter = Control.MOUSE_FILTER_STOP
+	
+	
 	yield(get_tree().create_timer(3.0), "timeout")
+#	do not forget that inside the animation player, we have set a 
+#	method to run at a paricular point
 	$ColorRect3/AnimationPlayer.play("fade_out")
+	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://scripts/gameArea.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Cookie_input/Label.tscn" type="PackedScene" id=2]
@@ -11,15 +11,45 @@
 [ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=9]
 [ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=10]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://imgs/flame_particle_32.png" type="Texture" id=12]
+[ext_resource path="res://imgs/particle0.png" type="Texture" id=12]
 [ext_resource path="res://sounds/sfx/correct.mp3" type="AudioStream" id=13]
 [ext_resource path="res://sounds/sfx/wrong.mp3" type="AudioStream" id=14]
+[ext_resource path="res://imgs/particle1.png" type="Texture" id=15]
+
+[sub_resource type="Gradient" id=31]
+colors = PoolColorArray( 0, 0.992157, 0.341176, 1, 0.666667, 1, 0, 1 )
+
+[sub_resource type="GradientTexture" id=32]
+gradient = SubResource( 31 )
+width = 2
+
+[sub_resource type="StyleBoxFlat" id=30]
+bg_color = Color( 0, 0.992157, 0.341176, 0 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color( 0.34902, 0.0941176, 0.0941176, 0.47451 )
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
 
 [sub_resource type="CanvasItemMaterial" id=24]
 
 [sub_resource type="Gradient" id=25]
 offsets = PoolRealArray( 0, 0.223529, 0.388235, 0.717647, 1 )
 colors = PoolColorArray( 1, 0.918919, 0, 0, 1, 0.916077, 0, 1, 1, 0.0981511, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0 )
+
+[sub_resource type="StyleBoxFlat" id=33]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 10
+border_width_top = 10
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="CanvasItemMaterial" id=26]
 blend_mode = 1
@@ -28,7 +58,7 @@ blend_mode = 1
 offsets = PoolRealArray( 0, 0.264706, 0.541176, 0.776471, 0.988235, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 61, 111 )
 
@@ -96,9 +126,9 @@ region = Rect2( 915, 0, 61, 111 )
 atlas = ExtResource( 8 )
 region = Rect2( 976, 0, 61, 111 )
 
-[sub_resource type="SpriteFrames" id=18]
+[sub_resource type="SpriteFrames" id=34]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"frames": [ SubResource( 18 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "default",
 "speed": 4.0
@@ -178,23 +208,62 @@ tracks/1/keys = {
 [node name="gameArea" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -7.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = 10.0
-color = Color( 0.0429206, 0.711212, 0.272728, 1 )
+color = Color( 0.0465031, 0.555832, 0.22327, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 621.0
+margin_bottom = -805.0
+rect_rotation = 89.9999
+rect_scale = Vector2( 1, -1.76906 )
+texture = SubResource( 32 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 5.0
+margin_right = -7.0
+margin_bottom = -5.0
+custom_styles/panel = SubResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="crossword_generator2_remake" type="Node2D" parent="."]
 script = ExtResource( 7 )
 
 [node name="union_combinator" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="cookie_input" parent="." instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -265.0
+margin_right = -2.0
+margin_bottom = -265.0
+
+[node name="Tween2" type="Tween" parent="cookie_input"]
 
 [node name="Particles2D" type="CPUParticles2D" parent="."]
 visible = false
@@ -210,17 +279,19 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 247.95
 color_ramp = SubResource( 25 )
 
-[node name="cookie_input" parent="." instance=ExtResource( 5 )]
+[node name="Panel2" type="Panel" parent="."]
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -2.0
-margin_top = -249.0
-margin_right = -2.0
-margin_bottom = -249.0
-
-[node name="Tween2" type="Tween" parent="cookie_input"]
+anchor_bottom = 0.5
+margin_left = -327.0
+margin_top = -517.0
+margin_right = 327.0
+margin_bottom = 107.0
+custom_styles/panel = SubResource( 33 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ControTileMap" type="Control" parent="."]
 anchor_right = 1.0
@@ -267,10 +338,9 @@ stream = ExtResource( 13 )
 stream = ExtResource( 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 88, 619 )
-scale = Vector2( 3.31762, 3.31762 )
-frames = SubResource( 18 )
-frame = 14
+position = Vector2( 75.4063, 1167.41 )
+scale = Vector2( 2.08504, 2.08504 )
+frames = SubResource( 34 )
 playing = true
 
 [node name="Label" parent="." instance=ExtResource( 2 )]
@@ -348,7 +418,7 @@ scale = Vector2( 1.25, 1.25 )
 amount = 28
 lifetime = 7.91
 lifetime_randomness = 0.71
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 direction = Vector2( 45, -1 )
 spread = 24.72
 gravity = Vector2( 0, 0 )

@@ -125,7 +125,7 @@ position = Vector2( 410, 270 )
 rotation = -0.220358
 scale = Vector2( 5.13281, 5.13281 )
 frames = SubResource( 22 )
-frame = 2
+frame = 9
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
@@ -134,7 +134,7 @@ position = Vector2( 60, 1054 )
 rotation = 0.0422393
 scale = Vector2( -5.04154, 5.13281 )
 frames = SubResource( 22 )
-frame = 12
+frame = 6
 playing = true
 
 [node name="VBoxContainer" type="Control" parent="."]
@@ -166,6 +166,9 @@ custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = SubResource( 26 )
 custom_styles/normal = ExtResource( 3 )
 text = "PLAY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
 margin_top = 164.0

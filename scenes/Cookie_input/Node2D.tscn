@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/Cookie_input/drawLine.gd" type="Script" id=2]
 [ext_resource path="res://imgs/Untitled175_20221111173512.png" type="Texture" id=3]
 [ext_resource path="res://scenes/Cookie_input/CustomButtons.tscn" type="PackedScene" id=4]
-[ext_resource path="res://imgs/flame_particle_32.png" type="Texture" id=5]
+[ext_resource path="res://imgs/particle0.png" type="Texture" id=5]
 [ext_resource path="res://sounds/sfx/448080__breviceps__wet-click.wav" type="AudioStream" id=6]
 [ext_resource path="res://sounds/sfx/399934__waveplaysfx__perc-short-click-snap-perc.wav" type="AudioStream" id=7]
 
@@ -25,7 +25,6 @@ __meta__ = {
 }
 
 [node name="Particles2D" type="CPUParticles2D" parent="."]
-visible = false
 modulate = Color( 1, 1, 1, 0.956863 )
 material = SubResource( 1 )
 position = Vector2( -5, 8 )

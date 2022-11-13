@@ -1,17 +1,247 @@
-[gd_scene format=2]
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/end_screen/end_screen.gd" type="Script" id=2]
+[ext_resource path="res://imgs/particle0.png" type="Texture" id=3]
+[ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=4]
+[ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://imgs/robo_idle.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 26
+font_data = ExtResource( 1 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 6 )
+region = Rect2( 61, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 6 )
+region = Rect2( 122, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 6 )
+region = Rect2( 183, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 6 )
+region = Rect2( 244, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 6 )
+region = Rect2( 305, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 6 )
+region = Rect2( 366, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 6 )
+region = Rect2( 427, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 6 )
+region = Rect2( 488, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 6 )
+region = Rect2( 549, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 6 )
+region = Rect2( 610, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 6 )
+region = Rect2( 671, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 6 )
+region = Rect2( 732, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 6 )
+region = Rect2( 793, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 6 )
+region = Rect2( 854, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 6 )
+region = Rect2( 915, 0, 61, 111 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 6 )
+region = Rect2( 976, 0, 61, 111 )
+
+[sub_resource type="SpriteFrames" id=19]
+animations = [ {
+"frames": [ SubResource( 18 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
+
+[sub_resource type="DynamicFont" id=20]
+size = 32
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="CanvasItemMaterial" id=22]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=23]
+offsets = PoolRealArray( 0, 0.168831, 0.474026, 0.564935, 0.733766, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 0.0475769, 0.0475769, 1, 0.987512, 1, 0.380925, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="Animation" id=24]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Particles2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -315, -384 ) ]
+}
+
+[sub_resource type="Animation" id=25]
+length = 3.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Particles2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.7, 1.2, 1.5, 1.7, 2.4, 2.8, 3, 3.3, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -315, -384 ), Vector2( 908, 766 ), Vector2( -85, 655 ), Vector2( 772, 399 ), Vector2( 955, 1013 ), Vector2( -140, 1166 ), Vector2( 755, 570 ), Vector2( 276, 109 ), Vector2( 520, 861 ), Vector2( 895, 456 ) ]
+}
 
 [node name="end_screen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -247.0
+margin_right = 247.0
+margin_bottom = 856.0
+custom_fonts/font = SubResource( 1 )
+text = "
+
+THANKS FOR PLAYING
+
+
+
+CREDITS:
+_
+
+PROGRAMMER:
+ROCKET007
+
+
+
+
+
+
+OTHERS(ART, MUSIC):
+RAMPAGE"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Label"]
+position = Vector2( 236, -46 )
+scale = Vector2( 2.08504, 2.08504 )
+frames = SubResource( 19 )
+frame = 4
+playing = true
+
+[node name="Button" type="Button" parent="Label"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -155.0
+margin_top = -120.0
+margin_right = 155.0
+rect_min_size = Vector2( 0, 120 )
+rect_pivot_offset = Vector2( 155, 60 )
+focus_neighbour_top = NodePath("../Button3")
+custom_fonts/font = SubResource( 20 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = SubResource( 21 )
+custom_styles/normal = ExtResource( 4 )
+text = ":-("
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles2D" type="CPUParticles2D" parent="."]
+position = Vector2( -315, -384 )
+amount = 94
+lifetime = 5.39
+local_coords = false
+texture = ExtResource( 3 )
+direction = Vector2( 0, -1 )
+spread = 180.0
+gravity = Vector2( 0, 121 )
+initial_velocity = 51.91
+
+[node name="Particles2D2" type="CPUParticles2D" parent="."]
+material = SubResource( 22 )
+position = Vector2( 183, 1333 )
+amount = 64
+lifetime = 10.39
+lifetime_randomness = 0.23
+local_coords = false
+texture = ExtResource( 3 )
+emission_shape = 3
+emission_points = PoolVector2Array( 0, 0, 360, 0 )
+emission_colors = PoolColorArray(  )
+direction = Vector2( 0, -1 )
+spread = 47.99
+gravity = Vector2( 0, -110 )
+initial_velocity = 124.29
+color_ramp = SubResource( 23 )
+hue_variation = 1.0
+hue_variation_random = 0.15
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.07
+anims/RESET = SubResource( 24 )
+anims/runing_particle1 = SubResource( 25 )
