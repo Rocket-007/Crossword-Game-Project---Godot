@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://scripts/gameArea.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Cookie_input/Label.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=10]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://imgs/flame_particle_32.png" type="Texture" id=12]
+[ext_resource path="res://sounds/sfx/correct.mp3" type="AudioStream" id=13]
+[ext_resource path="res://sounds/sfx/wrong.mp3" type="AudioStream" id=14]
 
 [sub_resource type="CanvasItemMaterial" id=24]
 
@@ -128,11 +130,59 @@ bg_color = Color( 0.6, 0.6, 0.6, 0 )
 size = 46
 font_data = ExtResource( 11 )
 
+[sub_resource type="Animation" id=28]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "fade_out"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "change_to_end_scene"
+} ]
+}
+
 [node name="gameArea" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -7.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -176,6 +226,9 @@ margin_bottom = -249.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="WordTileMap" type="TileMap" parent="ControTileMap"]
 self_modulate = Color( 0.444946, 0.196597, 0.0316655, 1 )
@@ -207,11 +260,17 @@ color_ramp = SubResource( 27 )
 hue_variation = -0.18
 hue_variation_random = 0.6
 
+[node name="correct_word" type="AudioStreamPlayer" parent="ControTileMap/WordTileMap"]
+stream = ExtResource( 13 )
+
+[node name="wrong_word" type="AudioStreamPlayer" parent="ControTileMap/WordTileMap"]
+stream = ExtResource( 14 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 88, 619 )
 scale = Vector2( 3.31762, 3.31762 )
 frames = SubResource( 18 )
-frame = 11
+frame = 14
 playing = true
 
 [node name="Label" parent="." instance=ExtResource( 2 )]
@@ -298,7 +357,23 @@ color_ramp = SubResource( 27 )
 hue_variation = -0.18
 hue_variation_random = 0.6
 
+[node name="ColorRect3" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0352941, 0.0431373, 0.0313726, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect3"]
+anims/RESET = SubResource( 28 )
+anims/fade_out = SubResource( 29 )
+
 [connection signal="word_drag_stop" from="cookie_input" to="ControTileMap/WordTileMap" method="_on_cookie_input_word_drag_stop"]
+[connection signal="game_passed" from="ControTileMap/WordTileMap" to="." method="_on_WordTileMap_game_passed"]
 [connection signal="level_completed" from="ControTileMap/WordTileMap" to="." method="_on_WordTileMap_level_completed"]
 [connection signal="tween_completed" from="ControTileMap/WordTileMap/Tween" to="ControTileMap/WordTileMap" method="_on_Tween_tween_completed"]
 [connection signal="pressed" from="Panel/nextLevel" to="." method="_on_nextLevel_pressed"]
+[connection signal="animation_finished" from="ColorRect3/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -112,6 +112,8 @@ func _on_cookie_input_word_drag_stop():
 				if word.word == gameArea.input_json[i][0] :#and !word.solved:
 					word.solved = true
 					
+#					playsound
+					$correct_word.play()
 #					save solved word
 					GlobalState.configFile.set_value("Level_Words",word.word,true)
 					GlobalState.configFile.save(GlobalState.file_to_save)
@@ -199,6 +201,16 @@ func _on_cookie_input_word_drag_stop():
 								$Tween.start()
 								
 							pass
+#		if the word dragged is wrong
+		for q in range(gameArea.input_json.size()):
+			if gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) != "" and gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) != gameArea.input_json[q][0]:
+				if q == gameArea.input_json.size()-1:
+#					playsound
+					print("nonsence ", gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged), " ", gameArea.input_json[i][0])
+					$wrong_word.play()
+			else:
+				pass
+				break
 
 
 #	finally check if we completed all words in the level

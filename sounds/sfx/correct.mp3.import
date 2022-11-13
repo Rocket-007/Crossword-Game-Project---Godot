@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/correct.mp3-a706ea3ffaff0bdf1d465ac8f8f50a44.mp3str"
+
+[deps]
+
+source_file="res://sounds/sfx/correct.mp3"
+dest_files=[ "res://.import/correct.mp3-a706ea3ffaff0bdf1d465ac8f8f50a44.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

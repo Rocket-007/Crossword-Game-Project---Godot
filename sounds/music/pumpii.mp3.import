@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pumpii.mp3-f52c9832ee85ba119e92bd4cf4339395.mp3str"
+
+[deps]
+
+source_file="res://sounds/music/pumpii.mp3"
+dest_files=[ "res://.import/pumpii.mp3-f52c9832ee85ba119e92bd4cf4339395.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=1.4

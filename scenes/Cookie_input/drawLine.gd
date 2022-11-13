@@ -88,6 +88,8 @@ func lineFunction():
 				get_button_over_itself().is_selected = true
 	#			push the button letter to the front of the drag word array stack
 				$CustomButtons.word_dragged.push_back(get_button_over_itself().letter)
+#				playsound here
+				$drag_click.play()
 		
 		
 		# this is for the backtracking
@@ -104,7 +106,8 @@ func lineFunction():
 					get_button_over_itself().is_selected = false
 #					pop out the back letter if its backtracking
 					$CustomButtons.word_dragged.pop_back()
-#					
+					$undrag_click.play()
+	
 #		make sure that there are line points in line2D
 		if $Line2D.get_point_count() > 0:
 #			this will be the last line point that will be following the mouse
@@ -129,7 +132,7 @@ func lineFunction():
 	if $CustomButtons.word_dragged.size() <= $CustomButtons.get_child_count():
 		pass
 	else:
-		 $CustomButtons.word_dragged.pop_front()
+		$CustomButtons.word_dragged.pop_front()
 
 #	this will set the labesls text to the array to string form
 func outputWord():

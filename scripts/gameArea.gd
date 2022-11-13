@@ -13,6 +13,14 @@ onready var crossword_gen = $crossword_generator2_remake
 #var combinator_array
 onready var combinator_array = $union_combinator.combinator_array
 
+
+
+func change_to_end_scene():
+	print("thanks for playing")
+	pass
+
+
+
 func _ready():
 	var temp_postion
 	var temp_color
@@ -50,11 +58,13 @@ func _notification(what):
 		# For Windows
 #		get_tree().paused = true
 #		pause.show()
+		GlobalState.get_node("click_button").play()
 		get_tree().change_scene("res://scenes/levels/levels_select.tscn")
 	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
 		# For Android
 #		get_tree().paused = true
 #		pause.show()
+		GlobalState.get_node("click_button").play()
 		get_tree().change_scene("res://scenes/levels/levels_select.tscn")
 
 
@@ -74,6 +84,8 @@ func _on_WordTileMap_level_completed():
 
 
 func _on_nextLevel_pressed():
+	GlobalState.get_node("click_button").play()
+	
 	if GlobalState.level_index+1 < Levels.levels_json.size():
 
 		
@@ -88,3 +100,13 @@ func _on_nextLevel_pressed():
 		GlobalState.configFile.set_value("Level_Index","index",GlobalState.level_index)
 		GlobalState.configFile.save(GlobalState.file_to_save)
 
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	pass
+		
+
+
+func _on_WordTileMap_game_passed():
+	yield(get_tree().create_timer(3.0), "timeout")
+	$ColorRect3/AnimationPlayer.play("fade_out")

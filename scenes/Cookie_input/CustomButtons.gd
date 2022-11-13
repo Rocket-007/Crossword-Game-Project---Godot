@@ -95,7 +95,7 @@ func _ready():
 #		label.text = combinator_array[get_children().find(v)]
 		
 #		finally we can set the z index of the node with will in turn affect the label child in it
-		node_container.set_z_index(1)
+		node_container.set_z_index(0)
 		v.add_child(node_container)
 		
 		

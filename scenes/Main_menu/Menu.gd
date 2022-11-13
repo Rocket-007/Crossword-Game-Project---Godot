@@ -86,19 +86,22 @@ func _process(delta):
 
 
 func _on_Button_pressed():
-	$AudioStreamPlayer.play()
+	GlobalState.get_node("click_button").play()
 	get_tree().change_scene("res://Scenes/levels/levels_select.tscn")
 
 
 func _on_Button2_pressed():
-	$AudioStreamPlayer.play()
+	
+	GlobalState.get_node("click_button").play()
 #	var options = load("res://debug_overlay.tscn").instance()
 	get_tree().change_scene("res://Scenes/options_button.tscn")
 
 
 func _on_Button3_pressed():
-	$AudioStreamPlayer.play()
+	GlobalState.get_node("click_button").play()
 	get_tree().quit()
+
+
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		# For Windows

@@ -78,6 +78,10 @@ func load_level(level): # funciton has the job of changing the crossword input a
 
 
 func _ready():
+#	play song 
+	$mainMenu_track.play()
+	
+	
 #	input_json = levels_json[1]
 #	yield(get_tree().create_timer(14.0), "timeout")
 
@@ -107,6 +111,8 @@ func _input(event):
 		configFile.save(file_to_save)
 		
 		load_level(level_index+1)
+		
+		GlobalState.get_node("click_button").play()
 	else:
 		pass
 		
@@ -122,5 +128,7 @@ func _input(event):
 		configFile.save(file_to_save)
 		
 		load_level(level_index+1)
+		
+		GlobalState.get_node("click_button").play()
 
 

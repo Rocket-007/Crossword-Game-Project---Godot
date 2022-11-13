@@ -8,9 +8,9 @@ var picked_level = 1
 var padding_top_buttom = 100
 
 func select_level(v):
+	GlobalState.get_node("click_button").play()
+	
 	picked_level = $Popup.get_children().find(v)+1
-
-	print("pressed ",picked_level)
 	
 	GlobalState.level_index = picked_level - 1
 	GlobalState.load_level(picked_level)
@@ -194,11 +194,13 @@ func _notification(what):
 		# For Windows
 #		get_tree().paused = true
 #		pause.show()
+		GlobalState.get_node("click_button").play()
 		get_tree().change_scene("res://scenes/Main_menu/Menu.tscn")
 	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
 		# For Android
 #		get_tree().paused = true
 #		pause.show()
+		GlobalState.get_node("click_button").play()
 		get_tree().change_scene("res://scenes/Main_menu/Menu.tscn")
 
 

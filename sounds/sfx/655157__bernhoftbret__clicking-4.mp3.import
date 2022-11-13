@@ -11,5 +11,5 @@ dest_files=[ "res://.import/655157__bernhoftbret__clicking-4.mp3-bc4843a2d2d8a49
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
