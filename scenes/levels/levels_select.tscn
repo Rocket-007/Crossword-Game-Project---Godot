@@ -26,7 +26,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false,
 "_edit_vertical_guides_": [  ]
 }
 
@@ -44,22 +43,23 @@ margin_right = 95.0
 margin_bottom = 81.0
 
 [node name="Popup" type="Popup" parent="."]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="Button" parent="Popup" instance=ExtResource( 2 )]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -94.5
-margin_top = -330.5
-margin_right = 94.5
-margin_bottom = -197.5
+margin_left = -282.0
+margin_top = -385.0
+margin_right = 254.0
+margin_bottom = -168.0
 
 [node name="VSlider" type="VSlider" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0.647059 )
 anchor_left = 0.994
 anchor_right = 1.0
@@ -76,6 +76,23 @@ min_value = 1.0
 value = 1.0
 rounded = true
 
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Tween2" type="Tween" parent="."]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 720.0
+margin_bottom = 217.0
+size_flags_horizontal = 3
+
+[node name="Button" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+margin_right = 720.0
+
 [node name="Label" type="Label" parent="."]
 margin_left = 10.0
 margin_top = 18.0
@@ -84,22 +101,6 @@ margin_bottom = 44.0
 custom_fonts/font = SubResource( 4 )
 text = "SELECT LEVEL"
 align = 1
-
-[node name="Tween" type="Tween" parent="."]
-
-[node name="Tween2" type="Tween" parent="."]
-
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 176.0
-margin_bottom = -415.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite" type="Sprite" parent="ScrollContainer"]
 
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="tween_completed" from="Tween2" to="." method="_on_Tween2_tween_completed"]

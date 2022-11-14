@@ -58,15 +58,11 @@ RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
 window/size/width=720
 window/size/height=1280
 window/stretch/mode="2d"
-window/stretch/aspect="keep_width"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/github-integration/plugin.cfg" )
-
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
 
 [physics]
 

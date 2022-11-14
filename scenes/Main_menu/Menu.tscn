@@ -125,7 +125,7 @@ position = Vector2( 410, 270 )
 rotation = -0.220358
 scale = Vector2( 5.13281, 5.13281 )
 frames = SubResource( 22 )
-frame = 9
+frame = 5
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
@@ -134,7 +134,7 @@ position = Vector2( 60, 1054 )
 rotation = 0.0422393
 scale = Vector2( -5.04154, 5.13281 )
 frames = SubResource( 22 )
-frame = 6
+frame = 2
 playing = true
 
 [node name="VBoxContainer" type="Control" parent="."]

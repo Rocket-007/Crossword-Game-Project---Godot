@@ -341,6 +341,7 @@ stream = ExtResource( 14 )
 position = Vector2( 75.4063, 1167.41 )
 scale = Vector2( 2.08504, 2.08504 )
 frames = SubResource( 34 )
+frame = 2
 playing = true
 
 [node name="Label" parent="." instance=ExtResource( 2 )]
