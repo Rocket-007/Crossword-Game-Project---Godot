@@ -175,10 +175,11 @@ func example_for_difference():
 
 var combinator_array = []
 
-onready var input_json = get_parent().input_json
+#onready var input_json = get_parent().input_json
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var input_json = Levels.levels_json[GlobalState.configFile.get_value("Level_Index","index")]
 #	example_for_difference()
 #	combinator_array.append_array(string_to_array(get_parent().input_json[0].answer))
 	var i = 1

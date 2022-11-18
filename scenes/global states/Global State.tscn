@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/global states/Global State.gd" type="Script" id=1]
 [ext_resource path="res://imgs/robo_idle.png" type="Texture" id=2]
 [ext_resource path="res://sounds/sfx/478197__jonnyruss01__click-1.wav" type="AudioStream" id=3]
 [ext_resource path="res://sounds/music/pumpii.mp3" type="AudioStream" id=4]
+[ext_resource path="res://sounds/music/All I Am - Dyalla-timestrech COMPRESSED CUT.mp3" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -89,12 +90,19 @@ visible = false
 position = Vector2( 161.813, 424.554 )
 scale = Vector2( 3.31762, 3.31762 )
 frames = SubResource( 18 )
-frame = 3
+frame = 5
 playing = true
 
 [node name="click_button" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "sfx"
 
 [node name="mainMenu_track" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = -28.476
+volume_db = -4.0
+bus = "music"
+
+[node name="game_track" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.406
+bus = "music"

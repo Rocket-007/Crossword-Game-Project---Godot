@@ -1,10 +1,13 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/Main_menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=3]
 [ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://Peach Days.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://imgs/gearimage1(potrait).jpg" type="Texture" id=6]
+
+[sub_resource type="CanvasItemMaterial" id=27]
 
 [sub_resource type="CanvasItemMaterial" id=5]
 blend_mode = 2
@@ -93,14 +96,23 @@ font_data = ExtResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.2, 0.329412, 0.243137, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 27 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0.992157, 0.341176, 1 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 7
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -125,7 +137,7 @@ position = Vector2( 410, 270 )
 rotation = -0.220358
 scale = Vector2( 5.13281, 5.13281 )
 frames = SubResource( 22 )
-frame = 5
+frame = 4
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
@@ -134,7 +146,7 @@ position = Vector2( 60, 1054 )
 rotation = 0.0422393
 scale = Vector2( -5.04154, 5.13281 )
 frames = SubResource( 22 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="VBoxContainer" type="Control" parent="."]
@@ -146,9 +158,6 @@ margin_left = -155.0
 margin_top = -484.0
 margin_right = 155.0
 rect_pivot_offset = Vector2( 150, 170 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Tween" type="Tween" parent="VBoxContainer"]
 

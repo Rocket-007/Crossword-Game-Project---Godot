@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/269198__mickleness__game-win.mp3-e135e54a1504ca0d29c015a75d7fd4eb.mp3str"
+
+[deps]
+
+source_file="res://sounds/sfx/269198__mickleness__game-win.mp3"
+dest_files=[ "res://.import/269198__mickleness__game-win.mp3-e135e54a1504ca0d29c015a75d7fd4eb.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

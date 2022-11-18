@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Cookie_input/Label.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Cookie_input/drawLine.gd" type="Script" id=2]
@@ -14,6 +14,86 @@
 offsets = PoolRealArray( 0, 0.223529, 0.388235, 0.717647, 1 )
 colors = PoolColorArray( 1, 0.918919, 0, 0, 1, 0.916077, 0, 1, 1, 0.0981511, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0 )
 
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item; 
+render_mode unshaded; 
+
+uniform float width : hint_range(0.0, 16.0); 
+uniform vec4 outline_color : hint_color;
+
+uniform sampler2D textureName;
+uniform vec2 textureName_size;
+
+void fragment() 
+{ 
+	//vec2 size = vec2(width) / vec2(textureSize(TEXTURE, 0)); 
+	vec2 size = vec2(width) / vec2(textureName_size); 
+	
+	vec4 sprite_color = texture(TEXTURE, UV); 
+	
+	float alpha = sprite_color.a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a; 
+	
+	vec3 final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a); 
+	COLOR = vec4(final_color, clamp(alpha, 0.0, 1.0)); 
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 7 )
+shader_param/width = 6.121
+shader_param/outline_color = Color( 0.133333, 0.172549, 0.0745098, 1 )
+shader_param/textureName_size = Vector2( 600, 600 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item; 
+render_mode unshaded; 
+
+uniform float width : hint_range(0.0, 16.0); 
+uniform vec4 outline_color : hint_color;
+
+uniform sampler2D textureName;
+uniform vec2 textureName_size;
+
+void fragment() 
+{ 
+	//vec2 size = vec2(width) / vec2(textureSize(TEXTURE, 0)); 
+	vec2 size = vec2(width) / vec2(textureName_size); 
+	
+	vec4 sprite_color = texture(TEXTURE, UV); 
+	
+	float alpha = sprite_color.a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a; 
+	
+	vec3 final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a); 
+	COLOR = vec4(final_color, clamp(alpha, 0.0, 1.0)); 
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 3 )
+shader_param/width = 6.427
+shader_param/outline_color = Color( 0.0156863, 0.188235, 0.168627, 1 )
+shader_param/textureName_size = Vector2( 600, 600 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/width = 4.67
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/textureName_size = Vector2( 600, 600 )
+
 [node name="Cookie_input" type="Control"]
 margin_left = 558.0
 margin_top = 411.0
@@ -25,6 +105,7 @@ __meta__ = {
 }
 
 [node name="Particles2D" type="CPUParticles2D" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0.956863 )
 material = SubResource( 1 )
 position = Vector2( -5, 8 )
@@ -40,12 +121,14 @@ color_ramp = SubResource( 2 )
 
 [node name="Sprite3" type="Sprite" parent="."]
 show_behind_parent = true
+material = SubResource( 5 )
 position = Vector2( -137, 162 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 show_behind_parent = true
+material = SubResource( 6 )
 position = Vector2( 187.5, 4.5 )
 scale = Vector2( 0.408333, 0.408333 )
 texture = ExtResource( 3 )
@@ -53,11 +136,12 @@ texture = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.92549 )
 show_behind_parent = true
+material = SubResource( 4 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 3 )
 
 [node name="Line2D" type="Line2D" parent="."]
-default_color = Color( 0.662745, 0.4, 0.109804, 1 )
+default_color = Color( 0.184314, 0.0901961, 0.380392, 1 )
 
 [node name="CustomButtons" parent="." instance=ExtResource( 4 )]
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/All I Am - Dyalla-timestrech COMPRESSED CUT.mp3-c4521876e8c05d90a224ebcc1e1937e0.mp3str"
+
+[deps]
+
+source_file="res://sounds/music/All I Am - Dyalla-timestrech COMPRESSED CUT.mp3"
+dest_files=[ "res://.import/All I Am - Dyalla-timestrech COMPRESSED CUT.mp3-c4521876e8c05d90a224ebcc1e1937e0.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0.0

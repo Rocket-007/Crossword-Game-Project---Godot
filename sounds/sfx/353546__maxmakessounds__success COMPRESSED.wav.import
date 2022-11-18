@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/353546__maxmakessounds__success COMPRESSED.wav-0291e9faf48a66801cbe6ab8f2231d55.sample"
+
+[deps]
+
+source_file="res://sounds/sfx/353546__maxmakessounds__success COMPRESSED.wav"
+dest_files=[ "res://.import/353546__maxmakessounds__success COMPRESSED.wav-0291e9faf48a66801cbe6ab8f2231d55.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

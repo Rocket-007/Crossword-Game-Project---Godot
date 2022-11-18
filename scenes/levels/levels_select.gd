@@ -15,9 +15,12 @@ func select_level(v):
 	
 	picked_level = vBox.get_children().find(v)+1
 	
-	GlobalState.level_index = picked_level - 1
-	GlobalState.load_level(picked_level)
-	
+#	GlobalState.level_index = picked_level - 1
+#	GlobalState.load_level(picked_level)
+	SceneChanger.goto_scene("res://scenes/gameArea.tscn", self)
+
+
+
 func gen_level_grids():
 	var starting_button = vBox_button
 	var starting_position = vBox_button.rect_position
@@ -52,13 +55,12 @@ func gen_level_grids():
 		
 		
 #		connect the signals
-		if button.is_connected("pressed", self, "select_level"):
+		if button.get_node("Button").is_connected("pressed", self, "select_level"):
 			pass
 		else:
-			button.connect("pressed", self, "select_level", [button])
+			button.get_node("Button").connect("pressed", self, "select_level", [button])
 		
 		vBox.add_child(button)
-		print("added a bitton")
 		button.get_node("Button").text = str(vBox.get_children().find(button)+1)
 		
 		pass
@@ -104,14 +106,12 @@ func shrink_activeButton():
 
 
 func set_slider(the_slide):
-#	-----------------------------
-	return
-#	for some reasons leaving the slider at 100 does not work well
-#	so have to use the size of a button + the paddings 
-	the_slide.max_value = vBox/Button.rect_size.y + padding_top_buttom
-	
-	the_slide.value = (the_slide.max_value/levels_json.size()) * GlobalState.level_index
-	pass
+#	set its color transparency
+	$ScrollContainer.get_v_scrollbar().self_modulate = Color(1,1,1,0.4)
+#	set the scroll position to the active button
+#	also what want extra 2 button levels to be on the screen 
+	the_slide.value = ((the_slide.max_value/levels_json.size()) * GlobalState.level_index) - (the_slide.max_value/levels_json.size())*2
+
 
 
 
@@ -119,15 +119,20 @@ func _ready():
 	for i in (100):
 #		levels_json.append("")
 		pass
-	
+		
 #	$Popup.show()
 #	var vBox = $ScrollContainer/VBoxContainer
 	
-	set_slider($VSlider)
 	
 	gen_level_grids()
-#	----------------------------
-#	return
+	
+
+#	make bar bigger
+	$ScrollContainer.get_v_scrollbar().rect_min_size.x = 60
+#	gotta yield(delay) so that we get the size correctly
+	yield(get_tree(), "idle_frame")
+	set_slider($ScrollContainer.get_v_scrollbar())
+
 
 #	make all buttons behind the current level index to be passed and not clickable
 	for i in range(GlobalState.level_index + 1):
@@ -140,8 +145,8 @@ func _ready():
 	vBox.get_child(GlobalState.level_index).get_node("Button").self_modulate = Color("a4a4a4") 
 #	vBox.get_child(GlobalState.level_index).get_node("Button").self_modulate = Color("ffa700")
 	vBox.get_child(GlobalState.level_index).get_node("Button").mouse_filter = Control.MOUSE_FILTER_STOP
-
-
+	
+	
 #	expand animation
 	expand_activeButton()
 

@@ -8,8 +8,10 @@ signal game_passed
 onready var gameArea  = get_parent().get_parent()
 
 
+
 onready var cookie_input = get_parent().get_parent().get_node("cookie_input")
 
+var input_json
 
 var TextureGridTextTscn = preload("res://scenes/gridMap_n_text/TextureGridText.tscn")
 
@@ -21,8 +23,9 @@ var used_rect
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	gameArea = get_parent().get_parent()
-	
-	for v in gameArea.input_json:
+	input_json = Levels.levels_json[GlobalState.configFile.get_value("Level_Index","index")]
+#
+	for v in input_json:
 		if v.size() < 2:
 			v.append("clue")
 		if v.size() < 3:
@@ -32,13 +35,13 @@ func _ready():
 	var index = GlobalState.configFile.get_value("Level_Index","index")
 	if GlobalState.configFile.has_section("Level_Words"):
 		for v in GlobalState.configFile.get_section_keys("Level_Words"):
-			for q in gameArea.input_json:
+			for q in input_json:
 				if q[0] == v:
 					q[2] = GlobalState.configFile.get_value("Level_Words", v)
 	
 	
 #	this was for the old generator
-#	var layout = gameArea.get_node("crossword_generator").generateLayout(gameArea.input_json)
+#	var layout = gameArea.get_node("crossword_generator").generateLayout(input_json)
 #
 #	for i in layout.table:
 #		print(i)
@@ -51,7 +54,7 @@ func _ready():
 
 
 			
-	layout = gameArea.get_node("crossword_generator2_remake").Crossword.new(10, 10, '-', 2000, gameArea.input_json)
+	layout = gameArea.get_node("crossword_generator2_remake").Crossword.new(10, 10, '-', 2000, input_json)
 
 	 
 	var start_full = float(OS.get_unix_time())
@@ -64,7 +67,7 @@ func _ready():
 	layout.display()
 #	print (layout.display())
 	print (layout.legend())
-	print (len(layout.current_word_list), 'out of', len(gameArea.input_json))
+	print (len(layout.current_word_list), 'out of', len(input_json))
 #	print (len(layout.current_word_list), 'out of', len(word_list))
 	print (layout.debug)
 	
@@ -75,6 +78,7 @@ func _ready():
 	clear()
 	for i in range(layout.rows):
 		for j in range(layout.cols):
+#			set_cell(j, i, 1)
 			if layout.grid[i][j] != "-":
 				set_cell(j, i, 0)
 #				var texture_grid_text = TextureGridTextTscn.instance()
@@ -87,8 +91,11 @@ func _ready():
  
 #				texture_grid_text.set_position((self.map_to_world(Vector2(j, i)) + self.cell_size/2)  - (texture_grid_text.get_rect().size / 2))
 #				add_child(texture_grid_text)
+
 	ready_draw_gridWords()
 	
+#	set the modulate of the second tile to deep purple :-)
+	self.tile_set.tile_set_modulate(1, "2f1761")
 	
 #	we need to center the time map node to middle of its parent 
 #	because we can not control the layout position of a tile map node
@@ -99,17 +106,20 @@ func _ready():
 	var temp_postion = self.position
 	$Tween.interpolate_property(self, "position", Vector2(0, 200) + temp_postion, temp_postion, 1.2, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
 	$Tween.start()
+	
+#	play start sound
+	$start_level.play()
 
 func _on_cookie_input_word_drag_stop():
 #	check if we guessed a correct word from the input json var
-	for i in range(gameArea.input_json.size()):
-		if gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) == gameArea.input_json[i][0]:
-#			print("got a word: ", gameArea.input_json[i][0])
+	for i in range(input_json.size()):
+		if gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) == input_json[i][0]:
+#			print("got a word: ", input_json[i][0])
 	
 #			find the word in the layout class word list and
 #			place the words in the correct position
 			for word in layout.current_word_list:
-				if word.word == gameArea.input_json[i][0] :#and !word.solved:
+				if word.word == input_json[i][0] :#and !word.solved:
 					word.solved = true
 					
 #					playsound
@@ -127,7 +137,7 @@ func _on_cookie_input_word_drag_stop():
 					var k = word.col - 1
 					if layout.grid[j][k] != "-":
 #						need some variables
-						var text_font_size = 35
+						var text_font_size = 35/self.scale.x
 						var text_x_offset = 50 #* self.scale.x
 						var text_y_offset = -35
 #						first check if the word is across
@@ -135,6 +145,10 @@ func _on_cookie_input_word_drag_stop():
 #							then we will increase a var toward the right according to the word length
 							for l in range(0, word.length):
 #								we will further use the l for letter position and gridText tscn coordinare as well
+
+#								set the tile to modulate a different color
+								set_cell(k + l, j, 1)
+
 								var texture_grid_text = TextureGridTextTscn.instance()
 								texture_grid_text.text = layout.grid[j][k + l]
 #								var temp_font_style = texture_grid_text.get_font("font").duplicate()
@@ -174,6 +188,10 @@ func _on_cookie_input_word_drag_stop():
 						elif word.down_across() == "down":
 							for l in range(0, word.length):
 #								same approach for across but for the y axis
+
+#								set the tile to modulate a different color
+								set_cell(k, j + l, 1)
+								
 								var texture_grid_text = TextureGridTextTscn.instance()
 								texture_grid_text.text = layout.grid[j + l][k]
 								
@@ -202,12 +220,12 @@ func _on_cookie_input_word_drag_stop():
 								
 							pass
 #		if the word dragged is wrong
-		for q in range(gameArea.input_json.size()):
-			if gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) != "  " and gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) != gameArea.input_json[q][0]:
-#			if gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) != "" and gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) != gameArea.input_json[q][0]:
-				if q == gameArea.input_json.size()-1:
+		for q in range(input_json.size()):
+			if gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) != "  " and gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) != input_json[q][0]:
+#			if gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) != "" and gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged) != input_json[q][0]:
+				if q == input_json.size()-1:
 #					playsound
-					print("nonsence ", gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged), " ", gameArea.input_json[i][0])
+					print("nonsence ", gameArea.get_node("union_combinator").array_to_string(cookie_input.get_node("CustomButtons").word_dragged), " ", input_json[i][0])
 					$wrong_word.play()
 			else:
 				pass
@@ -222,30 +240,34 @@ func _on_cookie_input_word_drag_stop():
 		else:
 			count = 0
 			break
-		if count == gameArea.input_json.size() and GlobalState.level_index+1 == Levels.levels_json.size():
+		if count == input_json.size() and GlobalState.level_index+1 == Levels.levels_json.size():
 			print("game completed")
 			emit_signal("game_passed")
-		elif count == gameArea.input_json.size():
-			print("level completed")
-			print("Global level index ", GlobalState.level_index)
-			print("Level json ", Levels.levels_json.size())
+		elif count == input_json.size():
 			emit_signal("level_completed")
+			yield(get_tree().create_timer(1), "timeout")
+			$won_level.play()
 
 
 
 
 func ready_draw_gridWords():
-#	for i in range(gameArea.input_json.size()):
+#	for i in range(input_json.size()):
 	for word in layout.current_word_list:
 		if word.solved == true:
 			var j = word.row - 1
 			var k = word.col - 1
+			
 			if layout.grid[j][k] != "-":
 				var text_font_size = 35
 				var text_x_offset = 0
 				var text_y_offset = 0
 				if word.down_across() == "across":
 					for l in range(0, word.length):
+						
+#						set the tile to modulate a different color
+						set_cell(k + l, j, 1)
+						
 						var texture_grid_text = TextureGridTextTscn.instance()
 						texture_grid_text.text = layout.grid[j][k + l]
 						
@@ -269,6 +291,10 @@ func ready_draw_gridWords():
 #						then check for if down
 				elif word.down_across() == "down":
 					for l in range(0, word.length):
+						
+#						set the tile to modulate a different color
+						set_cell(k, j + l, 1)
+						
 						var texture_grid_text = TextureGridTextTscn.instance()
 						texture_grid_text.text = layout.grid[j + l][k]
 						
@@ -295,14 +321,14 @@ func _process(delta):
 	update()
 	
 	#	update the tilemap position accordingly to the center of its parent
-	self.position.x = (get_parent().get_rect().get_center().x - (used_rect.x/2))# / self.scale.x
+	self.position.x = (get_parent().get_rect().get_center().x - (used_rect.x/2.5))# / self.scale.x
 	pass
 
 
 func _draw():
 #	draw_circle((cookie_input.get_node("Label").rect_global_position / self.scale) - (self.position / self.scale)
 #	+ (cookie_input.get_node("Label").get_rect().size)
-#	- Vector2((cookie_input.get_node("Label").get_total_character_count()+1) * 35,0),
+#	- Vector2((cookie_input.get_node("Label").get_total_character_count()+1) *  35/self.scale.x,0),
 #	10.0, Color.blueviolet)
 	pass
 

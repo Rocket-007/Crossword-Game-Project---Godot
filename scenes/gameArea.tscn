@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://scripts/gameArea.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Cookie_input/Label.tscn" type="PackedScene" id=2]
@@ -15,13 +15,17 @@
 [ext_resource path="res://sounds/sfx/correct.mp3" type="AudioStream" id=13]
 [ext_resource path="res://sounds/sfx/wrong.mp3" type="AudioStream" id=14]
 [ext_resource path="res://imgs/particle1.png" type="Texture" id=15]
+[ext_resource path="res://imgs/gearimage2(potriat).jpg" type="Texture" id=16]
+[ext_resource path="res://sounds/sfx/269198__mickleness__game-win.mp3" type="AudioStream" id=17]
+[ext_resource path="res://sounds/sfx/353546__maxmakessounds__success COMPRESSED.wav" type="AudioStream" id=18]
+
+[sub_resource type="CanvasItemMaterial" id=36]
 
 [sub_resource type="Gradient" id=31]
 colors = PoolColorArray( 0, 0.992157, 0.341176, 1, 0.666667, 1, 0, 1 )
 
 [sub_resource type="GradientTexture" id=32]
 gradient = SubResource( 31 )
-width = 2
 
 [sub_resource type="StyleBoxFlat" id=30]
 bg_color = Color( 0, 0.992157, 0.341176, 0 )
@@ -35,21 +39,17 @@ corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
 
-[sub_resource type="CanvasItemMaterial" id=24]
-
-[sub_resource type="Gradient" id=25]
-offsets = PoolRealArray( 0, 0.223529, 0.388235, 0.717647, 1 )
-colors = PoolColorArray( 1, 0.918919, 0, 0, 1, 0.916077, 0, 1, 1, 0.0981511, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0 )
-
 [sub_resource type="StyleBoxFlat" id=33]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_left = 10
-border_width_top = 10
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+bg_color = Color( 0.0862745, 0.235294, 0.517647, 0.811765 )
+border_color = Color( 0.976471, 0.976471, 0.976471, 0.639216 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 20
+shadow_color = Color( 0.00392157, 0.054902, 0.235294, 0.698039 )
+shadow_size = 22
+shadow_offset = Vector2( -10, 20 )
 
 [sub_resource type="CanvasItemMaterial" id=26]
 blend_mode = 1
@@ -57,6 +57,43 @@ blend_mode = 1
 [sub_resource type="Gradient" id=27]
 offsets = PoolRealArray( 0, 0.264706, 0.541176, 0.776471, 0.988235, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item; 
+render_mode unshaded; 
+
+uniform float width : hint_range(0.0, 16.0); 
+uniform vec4 outline_color : hint_color;
+
+uniform sampler2D textureName;
+uniform vec2 textureName_size;
+
+void fragment() 
+{ 
+	//vec2 size = vec2(width) / vec2(textureSize(TEXTURE, 0)); 
+	vec2 size = vec2(width) / vec2(textureName_size); 
+	
+	vec4 sprite_color = texture(TEXTURE, UV); 
+	
+	float alpha = sprite_color.a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a; 
+	
+	vec3 final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a); 
+	COLOR = vec4(final_color, clamp(alpha, 0.0, 1.0)); 
+}"
+
+[sub_resource type="ShaderMaterial" id=37]
+shader = SubResource( 3 )
+shader_param/width = 1.4
+shader_param/outline_color = Color( 0.0235294, 0.0745098, 0.156863, 1 )
+shader_param/textureName_size = Vector2( 1037, 111 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 8 )
@@ -66,7 +103,7 @@ region = Rect2( 0, 0, 61, 111 )
 atlas = ExtResource( 8 )
 region = Rect2( 61, 0, 61, 111 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=38]
 atlas = ExtResource( 8 )
 region = Rect2( 122, 0, 61, 111 )
 
@@ -128,7 +165,7 @@ region = Rect2( 976, 0, 61, 111 )
 
 [sub_resource type="SpriteFrames" id=34]
 animations = [ {
-"frames": [ SubResource( 18 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"frames": [ SubResource( 18 ), SubResource( 2 ), SubResource( 38 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "default",
 "speed": 4.0
@@ -209,33 +246,37 @@ tracks/1/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.0465031, 0.555832, 0.22327, 1 )
+color = Color( 0.0470588, 0.556863, 0.223529, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="gradient" type="TextureRect" parent="."]
+visible = false
+material = SubResource( 36 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 621.0
-margin_bottom = -805.0
-rect_rotation = 89.9999
-rect_scale = Vector2( 1, -1.76906 )
 texture = SubResource( 32 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="Panel" parent="."]
+[node name="bg_image" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 16 )
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="screen_border" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 7.0
@@ -243,15 +284,23 @@ margin_top = 5.0
 margin_right = -7.0
 margin_bottom = -5.0
 custom_styles/panel = SubResource( 30 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="crossword_generator2_remake" type="Node2D" parent="."]
 script = ExtResource( 7 )
 
 [node name="union_combinator" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="tile_board" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -327.0
+margin_top = -557.0
+margin_right = 327.0
+margin_bottom = 67.0
+custom_styles/panel = SubResource( 33 )
 
 [node name="cookie_input" parent="." instance=ExtResource( 5 )]
 anchor_left = 0.5
@@ -265,45 +314,13 @@ margin_bottom = -265.0
 
 [node name="Tween2" type="Tween" parent="cookie_input"]
 
-[node name="Particles2D" type="CPUParticles2D" parent="."]
-visible = false
-material = SubResource( 24 )
-position = Vector2( 358, 1014 )
-amount = 70
-lifetime_randomness = 0.56
-local_coords = false
-texture = ExtResource( 12 )
-direction = Vector2( 0, -1 )
-spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 247.95
-color_ramp = SubResource( 25 )
-
-[node name="Panel2" type="Panel" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -327.0
-margin_top = -517.0
-margin_right = 327.0
-margin_bottom = 107.0
-custom_styles/panel = SubResource( 33 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ControTileMap" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="WordTileMap" type="TileMap" parent="ControTileMap"]
-self_modulate = Color( 0.444946, 0.196597, 0.0316655, 1 )
-position = Vector2( 172, 189 )
+position = Vector2( 172, 149 )
 scale = Vector2( 0.8, 0.8 )
 tile_set = ExtResource( 4 )
 format = 1
@@ -337,18 +354,26 @@ stream = ExtResource( 13 )
 [node name="wrong_word" type="AudioStreamPlayer" parent="ControTileMap/WordTileMap"]
 stream = ExtResource( 14 )
 
+[node name="start_level" type="AudioStreamPlayer" parent="ControTileMap/WordTileMap"]
+stream = ExtResource( 18 )
+volume_db = -80.0
+
+[node name="won_level" type="AudioStreamPlayer" parent="ControTileMap/WordTileMap"]
+stream = ExtResource( 17 )
+volume_db = -7.729
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 37 )
 position = Vector2( 75.4063, 1167.41 )
 scale = Vector2( 2.08504, 2.08504 )
 frames = SubResource( 34 )
-frame = 2
 playing = true
 
 [node name="Label" parent="." instance=ExtResource( 2 )]
 margin_left = 71.0
-margin_top = 138.0
+margin_top = 98.0
 margin_right = 281.0
-margin_bottom = 173.0
+margin_bottom = 133.0
 text = "level:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -434,9 +459,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0.0352941, 0.0431373, 0.0313726, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect3"]
 anims/RESET = SubResource( 28 )

@@ -2,7 +2,7 @@ extends Control
 
 
 	
-var input_json = GlobalState.input_json
+#onready var input_json = GlobalState.input_json
 
 
 
@@ -25,6 +25,8 @@ func change_to_end_scene():
 
 
 func _ready():
+	var input_json = Levels.levels_json[GlobalState.configFile.get_value("Level_Index","index")]
+#	
 	var temp_postion
 	var temp_color
 	
@@ -40,7 +42,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$Label.text = "level: " + str(get_node("/root/GlobalState").level_index + 1)
+	$Label.text = "level: " + str(GlobalState.level_index + 1)
+#	$Label.text = "level: " + str(get_node("/root/GlobalState").level_index + 1)
 
 
 
@@ -54,6 +57,11 @@ func _input(event):
 #		get_tree().paused = true
 #		pause.show()
 		pass
+	if event is InputEventKey and event.scancode == KEY_A:
+		SceneChanger.goto_scene("res://scenes/gameArea.tscn", self)
+	if event is InputEventKey and event.scancode == KEY_D:
+		GlobalState.input_json = Levels.levels_json[(GlobalState.level_index+1)-1] 
+		SceneChanger.goto_scene("res://scenes/gameArea.tscn", self)
 		
 		
 func _notification(what):
@@ -69,6 +77,10 @@ func _notification(what):
 #		pause.show()
 		GlobalState.get_node("click_button").play()
 		get_tree().change_scene("res://scenes/levels/levels_select.tscn")
+		
+#		because of the sceneChanger, it sometimes doesnt free us the gameArea properly
+#		so have to do it manually when we are leaving
+#		self.queue_free()
 
 
 func _on_WordTileMap_level_completed():

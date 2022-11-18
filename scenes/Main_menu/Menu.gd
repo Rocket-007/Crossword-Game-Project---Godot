@@ -94,7 +94,7 @@ func _on_Button2_pressed():
 	
 	GlobalState.get_node("click_button").play()
 #	var options = load("res://debug_overlay.tscn").instance()
-	get_tree().change_scene("res://Scenes/options_button.tscn")
+	get_tree().change_scene("res://scenes/options/options_button.tscn")
 
 
 func _on_Button3_pressed():
