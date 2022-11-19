@@ -90,7 +90,7 @@ visible = false
 position = Vector2( 161.813, 424.554 )
 scale = Vector2( 3.31762, 3.31762 )
 frames = SubResource( 18 )
-frame = 1
+frame = 16
 playing = true
 
 [node name="click_button" type="AudioStreamPlayer" parent="."]

@@ -1,11 +1,21 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/levels/levels_select.gd" type="Script" id=1]
 [ext_resource path="res://scenes/levels/levelButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://imgs/f9ka_1fvl_180305.jpg" type="Texture" id=4]
 
-[sub_resource type="CanvasItemMaterial" id=5]
+[sub_resource type="CanvasItemMaterial" id=29]
+blend_mode = 2
+
+[sub_resource type="Gradient" id=28]
+colors = PoolColorArray( 0.230902, 0.395894, 0.489151, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=30]
+gradient = SubResource( 28 )
+width = 214
+height = 144
+fill_from = Vector2( 0, 1 )
+fill_to = Vector2( 0, 0 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 11.0
@@ -32,25 +42,20 @@ __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-show_behind_parent = true
+[node name="ColorRect2" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = 10.0
-color = Color( 0.0588235, 0.2, 0.345098, 1 )
+color = Color( 0.379564, 0.668923, 0.824799, 1 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-material = SubResource( 5 )
+[node name="ColorRect3" type="TextureRect" parent="."]
+material = SubResource( 29 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 4 )
+margin_top = 2.0
+margin_bottom = 2.0
+mouse_filter = 2
+texture = SubResource( 30 )
 expand = true
-stretch_mode = 7
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MenuButton" type="MenuButton" parent="."]
 margin_left = 83.0

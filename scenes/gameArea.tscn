@@ -300,7 +300,6 @@ __meta__ = {
 }
 
 [node name="bg_image" type="TextureRect" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 16 )
@@ -400,7 +399,7 @@ material = SubResource( 37 )
 position = Vector2( 75.4063, 1167.41 )
 scale = Vector2( 2.08504, 2.08504 )
 frames = SubResource( 34 )
-frame = 7
+frame = 15
 playing = true
 
 [node name="Label" parent="." instance=ExtResource( 2 )]
@@ -441,10 +440,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -154.0
-margin_top = -181.0
-margin_right = 156.0
-margin_bottom = -38.001
+margin_left = 270.0
+margin_top = 136.0
+margin_right = 580.0
+margin_bottom = 278.999
 custom_fonts/font = SubResource( 21 )
 custom_styles/hover = ExtResource( 9 )
 custom_styles/pressed = ExtResource( 10 )

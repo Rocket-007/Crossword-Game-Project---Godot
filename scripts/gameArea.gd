@@ -71,6 +71,10 @@ func _notification(what):
 #		pause.show()
 		GlobalState.get_node("click_button").play()
 		get_tree().change_scene("res://scenes/levels/levels_select.tscn")
+		
+#		because of the sceneChanger, it sometimes doesnt free us the gameArea properly
+#		so have to do it manually when we are leaving
+		self.queue_free()
 	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
 		# For Android
 #		get_tree().paused = true
@@ -80,7 +84,7 @@ func _notification(what):
 		
 #		because of the sceneChanger, it sometimes doesnt free us the gameArea properly
 #		so have to do it manually when we are leaving
-#		self.queue_free()
+		self.queue_free()
 
 
 func _on_WordTileMap_level_completed():

@@ -165,9 +165,9 @@ func _input(event):
 	if event.is_action_pressed("ui_right") and level_index+1 < Levels.levels_json.size():
 		delete_old_save()
 		
-#		level_index += 1
-#		configFile.set_value("Level_Index","index",level_index)
-#		configFile.save(file_to_save)
+		level_index += 1
+		configFile.set_value("Level_Index","index",level_index)
+		configFile.save(file_to_save)
 		
 #		we are no longer using the loadLevel function cause we wanted to add
 #		the cool loading screen and bar
@@ -178,10 +178,7 @@ func _input(event):
 		SceneChanger.goto_scene("res://scenes/gameArea.tscn", get_tree().root.get_node("gameArea"))
 		
 		GlobalState.get_node("click_button").play()
-#		yield(get_tree().create_timer(3), "timeout")
-#		level_index += 1
-#		configFile.set_value("Level_Index","index",level_index)
-#		configFile.save(file_to_save)
+	
 	
 	
 	if event.is_action_pressed("ui_left") and level_index-1 > -1:

@@ -1,11 +1,10 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/Main_menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=3]
 [ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://Peach Days.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://imgs/engineering-gears-green-background-engineering-gears-green-background-illustration-115267751(potrait).jpg" type="Texture" id=6]
 [ext_resource path="res://imgs/Untitled175_20221111173512.png" type="Texture" id=7]
 [ext_resource path="res://scenes/Main_menu/gear_handler.gd" type="Script" id=8]
 [ext_resource path="res://imgs/icons/github-logo-6532.png" type="Texture" id=9]
@@ -54,11 +53,11 @@ shader_param/textureName_size = Vector2( 600, 600 )
 [sub_resource type="CanvasItemMaterial" id=5]
 blend_mode = 2
 
-[sub_resource type="Gradient" id=28]
+[sub_resource type="Gradient" id=35]
 colors = PoolColorArray( 0.230902, 0.395894, 0.489151, 1, 0, 0, 0, 1 )
 
 [sub_resource type="GradientTexture2D" id=6]
-gradient = SubResource( 28 )
+gradient = SubResource( 35 )
 width = 214
 height = 144
 fill_from = Vector2( 0, 1 )
@@ -74,7 +73,7 @@ font_data = ExtResource( 2 )
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="DynamicFont" id=25]
-size = 17
+size = 15
 font_data = ExtResource( 2 )
 
 [sub_resource type="Theme" id=1]
@@ -140,7 +139,6 @@ visible = false
 material = SubResource( 27 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 6 )
 expand = true
 stretch_mode = 7
 __meta__ = {
@@ -284,16 +282,18 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -144.0
-margin_top = -85.0
+margin_top = -91.0
 margin_right = 144.0
+margin_bottom = -6.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SocialButt"]
+margin_top = 1.0
 margin_right = 288.0
-margin_bottom = 64.0
+margin_bottom = 65.0
 alignment = 1
 
 [node name="socialB" type="TextureButton" parent="SocialButt/HBoxContainer"]
@@ -324,9 +324,9 @@ texture_hover = ExtResource( 9 )
 texture_focused = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="SocialButt"]
-margin_top = 68.0
+margin_top = 69.0
 margin_right = 288.0
-margin_bottom = 85.0
+margin_bottom = 84.0
 custom_fonts/font = SubResource( 25 )
 text = "ROCKET_007"
 align = 1
