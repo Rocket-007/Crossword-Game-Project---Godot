@@ -91,6 +91,7 @@ func _on_WordTileMap_level_completed():
 #	animate the completed level panel
 	yield(get_tree().create_timer(1.0), "timeout")
 	$Panel.show()
+	$Panel/level_clear_aniPlay.play("floating")
 	temp_postion = $Panel.rect_position
 	temp_color = $Panel.modulate
 	$Panel/Tween.interpolate_property($Panel, "rect_position", Vector2(0, 390) + temp_postion, temp_postion, 0.9, Tween.TRANS_BACK, Tween.EASE_OUT)
@@ -107,8 +108,11 @@ func _on_nextLevel_pressed():
 		
 		var next_level = GlobalState.level_index + 2
 		GlobalState.level_index = next_level - 1
-		GlobalState.load_level(next_level)
-
+		
+		
+#		GlobalState.load_level(next_level)
+		SceneChanger.goto_scene("res://scenes/gameArea.tscn", get_tree().root.get_node("gameArea"))
+		
 
 		GlobalState.delete_old_save()
 		

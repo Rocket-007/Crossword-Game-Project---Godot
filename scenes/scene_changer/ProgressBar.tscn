@@ -40,8 +40,8 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
-shader_param/width = 6.121
-shader_param/outline_color = Color( 0.133333, 0.172549, 0.0745098, 1 )
+shader_param/width = 8.388
+shader_param/outline_color = Color( 1, 1, 1, 1 )
 shader_param/textureName_size = Vector2( 600, 600 )
 
 [node name="ProgressBar" type="ProgressBar"]

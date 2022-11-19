@@ -1,70 +1,68 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/Main_menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=3]
 [ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://Peach Days.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://imgs/gearimage1(potrait).jpg" type="Texture" id=6]
+[ext_resource path="res://imgs/engineering-gears-green-background-engineering-gears-green-background-illustration-115267751(potrait).jpg" type="Texture" id=6]
+[ext_resource path="res://imgs/Untitled175_20221111173512.png" type="Texture" id=7]
+[ext_resource path="res://scenes/Main_menu/gear_handler.gd" type="Script" id=8]
+[ext_resource path="res://imgs/icons/github-logo-6532.png" type="Texture" id=9]
+[ext_resource path="res://imgs/icons/youtube-logo-2431.png" type="Texture" id=10]
+[ext_resource path="res://imgs/icons/itch io 64.png" type="Texture" id=11]
 
 [sub_resource type="CanvasItemMaterial" id=27]
+
+[sub_resource type="Shader" id=29]
+code = "shader_type canvas_item; 
+render_mode unshaded; 
+
+uniform float width : hint_range(0.0, 16.0); 
+uniform vec4 outline_color : hint_color;
+
+uniform sampler2D textureName;
+uniform vec2 textureName_size;
+
+void fragment() 
+{ 
+	//vec2 size = vec2(width) / vec2(textureSize(TEXTURE, 0)); 
+	vec2 size = vec2(width) / vec2(textureName_size); 
+	
+	vec4 sprite_color = texture(TEXTURE, UV); 
+	
+	float alpha = sprite_color.a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a; 
+	
+	vec3 final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a); 
+	COLOR = vec4(final_color, clamp(alpha, 0.0, 1.0)); 
+}"
+
+[sub_resource type="ShaderMaterial" id=30]
+shader = SubResource( 29 )
+shader_param/width = 4.67
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/textureName_size = Vector2( 600, 600 )
 
 [sub_resource type="CanvasItemMaterial" id=5]
 blend_mode = 2
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=28]
+colors = PoolColorArray( 0.230902, 0.395894, 0.489151, 1, 0, 0, 0, 1 )
 
 [sub_resource type="GradientTexture2D" id=6]
-gradient = SubResource( 4 )
-width = 434
-height = 664
-
-[sub_resource type="AtlasTexture" id=9]
-region = Rect2( 0, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=10]
-region = Rect2( 128, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=11]
-region = Rect2( 256, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=12]
-region = Rect2( 384, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=13]
-region = Rect2( 512, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=14]
-region = Rect2( 640, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=15]
-region = Rect2( 768, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=16]
-region = Rect2( 896, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=17]
-region = Rect2( 1024, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=18]
-region = Rect2( 1152, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=19]
-region = Rect2( 1280, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=20]
-region = Rect2( 1408, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=21]
-region = Rect2( 1536, 0, 128, 128 )
-
-[sub_resource type="SpriteFrames" id=22]
-animations = [ {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
-"loop": true,
-"name": "default",
-"speed": 10.0
-} ]
+gradient = SubResource( 28 )
+width = 214
+height = 144
+fill_from = Vector2( 0, 1 )
+fill_to = Vector2( 0, 0 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 32
@@ -76,7 +74,8 @@ font_data = ExtResource( 2 )
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="DynamicFont" id=25]
-font_data = ExtResource( 5 )
+size = 17
+font_data = ExtResource( 2 )
 
 [sub_resource type="Theme" id=1]
 
@@ -92,21 +91,52 @@ font_data = ExtResource( 5 )
 size = 25
 font_data = ExtResource( 5 )
 
+[sub_resource type="DynamicFontData" id=31]
+font_path = "res://fonts/Press Start 2P Font.ttf"
+
+[sub_resource type="DynamicFont" id=32]
+size = 106
+font_data = SubResource( 31 )
+
+[sub_resource type="Animation" id=33]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "title_typing"
+length = 7.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0, 0.679, 0.0, 1.0 ]
+}
+
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.2, 0.329412, 0.243137, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 material = SubResource( 27 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -117,37 +147,82 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.379564, 0.668923, 0.824799, 1 )
+
+[node name="gear_handler" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 150, 170 )
+script = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 30 )
+position = Vector2( 115.5, 604.5 )
+scale = Vector2( 0.541667, 0.541667 )
+texture = ExtResource( 7 )
+
+[node name="Sprite2" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 30 )
+position = Vector2( 101.875, 903.125 )
+scale = Vector2( 0.319583, 0.319583 )
+texture = ExtResource( 7 )
+
+[node name="Sprite3" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 30 )
+position = Vector2( 340.75, 742.75 )
+scale = Vector2( 0.269167, 0.269167 )
+texture = ExtResource( 7 )
+
+[node name="Sprite4" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 30 )
+position = Vector2( 638, 1159 )
+scale = Vector2( 0.375, 0.375 )
+texture = ExtResource( 7 )
+
+[node name="Sprite5" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 30 )
+position = Vector2( 676.75, 918.75 )
+scale = Vector2( 0.269167, 0.269167 )
+texture = ExtResource( 7 )
+
+[node name="Sprite6" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 30 )
+position = Vector2( 533.125, 993.875 )
+scale = Vector2( 0.199583, 0.199583 )
+texture = ExtResource( 7 )
+
+[node name="Sprite7" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 30 )
+position = Vector2( 200, 1094 )
+scale = Vector2( 0.199583, 0.199583 )
+texture = ExtResource( 7 )
+
 [node name="ColorRect2" type="TextureRect" parent="."]
-visible = false
 material = SubResource( 5 )
-margin_left = 656.0
-margin_top = 868.0
-margin_right = 1090.0
-margin_bottom = 1532.0
-rect_rotation = 89.9999
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_bottom = 2.0
 mouse_filter = 2
 texture = SubResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-visible = false
-position = Vector2( 410, 270 )
-rotation = -0.220358
-scale = Vector2( 5.13281, 5.13281 )
-frames = SubResource( 22 )
-frame = 4
-playing = true
-
-[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
-visible = false
-position = Vector2( 60, 1054 )
-rotation = 0.0422393
-scale = Vector2( -5.04154, 5.13281 )
-frames = SubResource( 22 )
-frame = 1
-playing = true
+expand = true
 
 [node name="VBoxContainer" type="Control" parent="."]
 anchor_left = 0.5
@@ -155,7 +230,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -155.0
-margin_top = -484.0
+margin_top = -561.0
 margin_right = 155.0
 rect_pivot_offset = Vector2( 150, 170 )
 
@@ -175,9 +250,6 @@ custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = SubResource( 26 )
 custom_styles/normal = ExtResource( 3 )
 text = "PLAY"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
 margin_top = 164.0
@@ -207,13 +279,12 @@ custom_styles/normal = ExtResource( 3 )
 text = "EXIT"
 
 [node name="SocialButt" type="VBoxContainer" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -144.0
-margin_top = -138.0
+margin_top = -85.0
 margin_right = 144.0
 alignment = 1
 __meta__ = {
@@ -221,27 +292,41 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SocialButt"]
-margin_top = 66.0
 margin_right = 288.0
-margin_bottom = 66.0
+margin_bottom = 64.0
 alignment = 1
 
 [node name="socialB" type="TextureButton" parent="SocialButt/HBoxContainer"]
-margin_left = 140.0
-margin_right = 140.0
+margin_left = 51.0
+margin_right = 108.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 10 )
+texture_hover = ExtResource( 10 )
+texture_focused = ExtResource( 10 )
 
 [node name="socialB2" type="TextureButton" parent="SocialButt/HBoxContainer"]
-margin_left = 144.0
-margin_right = 144.0
+margin_left = 112.0
+margin_right = 176.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 11 )
+texture_hover = ExtResource( 11 )
+texture_focused = ExtResource( 11 )
 
 [node name="socialB3" type="TextureButton" parent="SocialButt/HBoxContainer"]
-margin_left = 148.0
-margin_right = 148.0
+margin_left = 180.0
+margin_right = 237.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 9 )
+texture_focused = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="SocialButt"]
-margin_top = 70.0
+margin_top = 68.0
 margin_right = 288.0
-margin_bottom = 72.0
+margin_bottom = 85.0
 custom_fonts/font = SubResource( 25 )
 text = "ROCKET_007"
 align = 1
@@ -348,6 +433,24 @@ theme = SubResource( 1 )
 custom_fonts/font = SubResource( 23 )
 text = "TIME: "
 valign = 1
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -265.0
+margin_top = 56.0
+margin_right = 265.0
+margin_bottom = 162.0
+custom_colors/font_color_shadow = Color( 0.054902, 0.32549, 0.478431, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 10
+custom_fonts/font = SubResource( 32 )
+text = "TITLE"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+anims/RESET = SubResource( 33 )
+anims/title_typing = SubResource( 34 )
 
 [connection signal="tween_completed" from="VBoxContainer/Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="tween_completed" from="VBoxContainer/Tween2" to="." method="_on_Tween2_tween_completed"]

@@ -60,7 +60,7 @@ func _ready():
 	var start_full = float(OS.get_unix_time())
 	
 #	var layout = Crossword.new(13, 13, '-', 5000, word_list)
-	layout.compute_crossword(0)
+	layout.compute_crossword(1)
 #	print (layout.word_bank())
 	print (layout.solution())
 	#print (layout.word_find())

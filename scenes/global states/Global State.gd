@@ -40,7 +40,8 @@ var configFile = ConfigFile.new()
 
 
 #needed cause i dont what to make each level all have a separete saved data
-#so we will claer the saved data when you complete a level
+#so we will claer the saved data when you complete a level or in other use cases
+#when u use the arrow keys
 func delete_old_save():
 	for v in configFile.get_section_keys("Level_Words"):
 		configFile.erase_section_key("Level_Words", v)
@@ -86,9 +87,7 @@ func createSave():
 
 
 func load_level(level): # funciton has the job of changing the crossword input and scene
-#	if level > Levels.levels_json.size():
-#		print("exceeded")
-#		return
+#	unfortunatl most fuctions dont rely on this any more
 	input_json = Levels.levels_json[level-1]
 	get_tree().change_scene("res://scenes/gameArea.tscn")
 	
@@ -108,6 +107,7 @@ func _ready():
 	createSave()
 	
 	level_index = configFile.get_value("Level_Index","index")
+	input_json = Levels.levels_json[level_index]
 	
 	pass
 
@@ -165,34 +165,38 @@ func _input(event):
 	if event.is_action_pressed("ui_right") and level_index+1 < Levels.levels_json.size():
 		delete_old_save()
 		
-		level_index += 1
-		configFile.set_value("Level_Index","index",level_index)
-		configFile.save(file_to_save)
+#		level_index += 1
+#		configFile.set_value("Level_Index","index",level_index)
+#		configFile.save(file_to_save)
 		
+#		we are no longer using the loadLevel function cause we wanted to add
+#		the cool loading screen and bar
 #		load_level(level_index+1)
 		
-#		input_json = Levels.levels_json[(level_index + 1)-1] 
-
+#		we also want to update the GlobState's own input_json(tho no other node uses it again as ref)
+		input_json = Levels.levels_json[(level_index)]
 		SceneChanger.goto_scene("res://scenes/gameArea.tscn", get_tree().root.get_node("gameArea"))
 		
 		GlobalState.get_node("click_button").play()
-		
-		print(root.get_children())
-	else:
-		pass
-		
-		
-
-		
+#		yield(get_tree().create_timer(3), "timeout")
+#		level_index += 1
+#		configFile.set_value("Level_Index","index",level_index)
+#		configFile.save(file_to_save)
+	
+	
 	if event.is_action_pressed("ui_left") and level_index-1 > -1:
-			
 		delete_old_save()
 		
 		level_index -= 1
 		configFile.set_value("Level_Index","index",level_index)
 		configFile.save(file_to_save)
 		
-		load_level(level_index+1)
+#		load_level(level_index+1)
+		
+#		we also want to update the GlobState's own input_json(tho no other node uses it again as ref)
+		input_json = Levels.levels_json[(level_index)]
+		SceneChanger.goto_scene("res://scenes/gameArea.tscn", get_tree().root.get_node("gameArea"))
+
 		
 		GlobalState.get_node("click_button").play()
 

@@ -68,7 +68,8 @@ func shrink_menuButton():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	GlobalNode.get_node("AudioStreamPlayer").play()
+	$Label/AnimationPlayer.play("title_typing")
+	
 	$VBoxContainer/Button.grab_focus()
 	
 	expand_menuButton()
