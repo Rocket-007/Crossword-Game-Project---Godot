@@ -44,7 +44,17 @@ func _ready():
 func _process(delta):
 	$Label.text = "level: " + str(GlobalState.level_index + 1)
 #	$Label.text = "level: " + str(get_node("/root/GlobalState").level_index + 1)
-
+	
+	
+#	this is for the robots_box if he is cheering
+	if $robot_box/robot_cheer.frame == 7:
+#		print("no longer playing")
+		$robot_box/robot_cheer.visible = false
+		$robot_box/robot_cheer.playing = false
+		$robot_box/robot_idle.visible = true
+	if $robot_box/robot_cheer.playing:
+		$robot_box/robot_cheer.visible = true
+		$robot_box/robot_idle.visible = false
 
 
 
@@ -139,4 +149,16 @@ func _on_WordTileMap_game_passed():
 #	do not forget that inside the animation player, we have set a 
 #	method to run at a paricular point
 	$ColorRect3/AnimationPlayer.play("fade_out")
+	
+
+
+
+func _on_robot_box_gui_input(event):
+	if  event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
+		$robot_box/robot_cheer.frame = 0
+		$robot_box/robot_cheer.play()
+		$robot_box/click_robo.play()
+
+		
+#		$robot_box/robot_idle.stop()
 	

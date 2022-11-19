@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://scripts/gameArea.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Cookie_input/Label.tscn" type="PackedScene" id=2]
@@ -8,8 +8,8 @@
 [ext_resource path="res://scripts/WordTileMap.gd" type="Script" id=6]
 [ext_resource path="res://scripts/crossword_gen_remake.gd" type="Script" id=7]
 [ext_resource path="res://imgs/robo_idle.png" type="Texture" id=8]
-[ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=9]
-[ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=10]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonFocus.tres" type="StyleBox" id=9]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonPressed.tres" type="StyleBox" id=10]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://imgs/particle0.png" type="Texture" id=12]
 [ext_resource path="res://sounds/sfx/correct.mp3" type="AudioStream" id=13]
@@ -18,6 +18,9 @@
 [ext_resource path="res://imgs/gearimage2(potriat).jpg" type="Texture" id=16]
 [ext_resource path="res://sounds/sfx/269198__mickleness__game-win.mp3" type="AudioStream" id=17]
 [ext_resource path="res://sounds/sfx/353546__maxmakessounds__success COMPRESSED.wav" type="AudioStream" id=18]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonNormal.tres" type="StyleBox" id=19]
+[ext_resource path="res://imgs/robocheers.png" type="Texture" id=20]
+[ext_resource path="res://sounds/sfx/658266__matrixxx__retro-inspect-sound-ui-or-in-game-notification.wav" type="AudioStream" id=21]
 
 [sub_resource type="CanvasItemMaterial" id=36]
 
@@ -57,6 +60,83 @@ blend_mode = 1
 [sub_resource type="Gradient" id=27]
 offsets = PoolRealArray( 0, 0.264706, 0.541176, 0.776471, 0.988235, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+
+[sub_resource type="Shader" id=51]
+code = "shader_type canvas_item; 
+render_mode unshaded; 
+
+uniform float width : hint_range(0.0, 16.0); 
+uniform vec4 outline_color : hint_color;
+
+uniform sampler2D textureName;
+uniform vec2 textureName_size;
+
+void fragment() 
+{ 
+	//vec2 size = vec2(width) / vec2(textureSize(TEXTURE, 0)); 
+	vec2 size = vec2(width) / vec2(textureName_size); 
+	
+	vec4 sprite_color = texture(TEXTURE, UV); 
+	
+	float alpha = sprite_color.a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a; 
+	
+	vec3 final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a); 
+	COLOR = vec4(final_color, clamp(alpha, 0.0, 1.0)); 
+}"
+
+[sub_resource type="ShaderMaterial" id=52]
+shader = SubResource( 51 )
+shader_param/width = 1.4
+shader_param/outline_color = Color( 0.0235294, 0.0745098, 0.156863, 1 )
+shader_param/textureName_size = Vector2( 488, 150 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 20 )
+region = Rect2( 61, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 20 )
+region = Rect2( 122, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 20 )
+region = Rect2( 183, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 20 )
+region = Rect2( 244, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 20 )
+region = Rect2( 305, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 20 )
+region = Rect2( 366, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 20 )
+region = Rect2( 427, 0, 61, 150 )
+
+[sub_resource type="SpriteFrames" id=50]
+animations = [ {
+"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ) ],
+"loop": false,
+"name": "default",
+"speed": 12.0
+} ]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item; 
@@ -171,6 +251,12 @@ animations = [ {
 "speed": 4.0
 } ]
 
+[sub_resource type="DynamicFont" id=41]
+size = 35
+outline_size = 6
+outline_color = Color( 0.184314, 0.0901961, 0.380392, 1 )
+font_data = ExtResource( 11 )
+
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0, 0, 0, 0.505882 )
 border_width_top = 20
@@ -189,9 +275,6 @@ font_data = ExtResource( 11 )
 [sub_resource type="DynamicFont" id=21]
 size = 34
 font_data = ExtResource( 11 )
-
-[sub_resource type="StyleBoxFlat" id=22]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="DynamicFont" id=23]
 size = 46
@@ -278,6 +361,9 @@ tracks/1/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -350,6 +436,9 @@ margin_bottom = -265.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="WordTileMap" type="TileMap" parent="ControTileMap"]
 position = Vector2( 172, 149 )
@@ -394,19 +483,45 @@ volume_db = -80.0
 stream = ExtResource( 17 )
 volume_db = -7.729
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="robot_box" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 26.0
+margin_top = -218.0
+margin_right = 142.0
+margin_bottom = -19.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="robot_cheer" type="AnimatedSprite" parent="robot_box"]
+material = SubResource( 52 )
+position = Vector2( 49.406, 65.41 )
+scale = Vector2( 2.085, 2.085 )
+frames = SubResource( 50 )
+frame = 7
+
+[node name="robot_idle" type="AnimatedSprite" parent="robot_box"]
+visible = false
 material = SubResource( 37 )
-position = Vector2( 75.4063, 1167.41 )
+position = Vector2( 49.4063, 105.41 )
 scale = Vector2( 2.08504, 2.08504 )
 frames = SubResource( 34 )
-frame = 15
+frame = 16
 playing = true
+
+[node name="click_robo" type="AudioStreamPlayer" parent="robot_box"]
+stream = ExtResource( 21 )
+bus = "sfx"
 
 [node name="Label" parent="." instance=ExtResource( 2 )]
 margin_left = 71.0
 margin_top = 98.0
 margin_right = 281.0
 margin_bottom = 133.0
+custom_colors/font_color_shadow = Color( 0.054902, 0.32549, 0.478431, 1 )
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 41 )
 text = "level:"
 
 [node name="Panel" type="Panel" parent="."]
@@ -445,10 +560,10 @@ margin_top = 136.0
 margin_right = 580.0
 margin_bottom = 278.999
 custom_fonts/font = SubResource( 21 )
-custom_styles/hover = ExtResource( 9 )
+custom_styles/hover = ExtResource( 19 )
 custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = SubResource( 22 )
-custom_styles/normal = ExtResource( 9 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 19 )
 text = "NEXT"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -496,6 +611,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0.0352941, 0.0431373, 0.0313726, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect3"]
 anims/RESET = SubResource( 28 )
@@ -505,5 +623,6 @@ anims/fade_out = SubResource( 29 )
 [connection signal="game_passed" from="ControTileMap/WordTileMap" to="." method="_on_WordTileMap_game_passed"]
 [connection signal="level_completed" from="ControTileMap/WordTileMap" to="." method="_on_WordTileMap_level_completed"]
 [connection signal="tween_completed" from="ControTileMap/WordTileMap/Tween" to="ControTileMap/WordTileMap" method="_on_Tween_tween_completed"]
+[connection signal="gui_input" from="robot_box" to="." method="_on_robot_box_gui_input"]
 [connection signal="pressed" from="Panel/nextLevel" to="." method="_on_nextLevel_pressed"]
 [connection signal="animation_finished" from="ColorRect3/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

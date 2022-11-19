@@ -15,4 +15,7 @@ func _ready():
 func _process(delta):
 	for v in get_children():
 #		v.position.y -= 30*delta
-		v.rotation_degrees += (20 / v.scale.x)*delta
+		if get_children().find(v) % 2 == 0:
+			v.rotation_degrees += (20 / (v.scale.x))*delta
+		else:
+			v.rotation_degrees -= (20 / (v.scale.x))*delta

@@ -5,7 +5,7 @@
 [sub_resource type="DynamicFont" id=1]
 size = 35
 outline_size = 4
-outline_color = Color( 0.0352941, 0.0313726, 0.0313726, 1 )
+outline_color = Color( 0.0668865, 0.0539078, 0.314819, 1 )
 font_data = ExtResource( 1 )
 
 [node name="Label" type="Label"]
@@ -13,6 +13,9 @@ margin_left = 300.0
 margin_top = 276.0
 margin_right = 335.0
 margin_bottom = 311.0
+custom_colors/font_color_shadow = Color( 0.154014, 0.467614, 0.644867, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 2
 custom_fonts/font = SubResource( 1 )
 text = "e"
 align = 1

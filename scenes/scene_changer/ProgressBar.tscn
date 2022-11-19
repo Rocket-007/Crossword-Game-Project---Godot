@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://imgs/Untitled175_20221111173512.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 [sub_resource type="DynamicFont" id=1]
 size = 33
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.027451, 0.227451, 0.341176, 1 )
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item; 
@@ -54,6 +57,7 @@ margin_top = -20.0
 margin_right = 367.0
 margin_bottom = 20.0
 custom_fonts/font = SubResource( 1 )
+custom_styles/bg = SubResource( 5 )
 
 [node name="Sprite3" type="Sprite" parent="."]
 show_behind_parent = true

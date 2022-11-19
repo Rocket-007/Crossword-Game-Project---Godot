@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/options/options_button.gd" type="Script" id=1]
 [ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=2]
@@ -6,29 +6,164 @@
 [ext_resource path="res://stylings/ButtonFocus.tres" type="StyleBox" id=4]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://imgs/transparent.png" type="Texture" id=6]
+[ext_resource path="res://imgs/Untitled175_20221111173512.png" type="Texture" id=7]
+[ext_resource path="res://scenes/Main_menu/gear_handler.gd" type="Script" id=8]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonFocus.tres" type="StyleBox" id=9]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonPressed.tres" type="StyleBox" id=10]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonNormal.tres" type="StyleBox" id=11]
+[ext_resource path="res://imgs/Untitled176_20221118180223.png" type="Texture" id=12]
+
+[sub_resource type="Shader" id=39]
+code = "shader_type canvas_item; 
+render_mode unshaded; 
+
+uniform float width : hint_range(0.0, 16.0); 
+uniform vec4 outline_color : hint_color;
+
+uniform sampler2D textureName;
+uniform vec2 textureName_size;
+
+void fragment() 
+{ 
+	//vec2 size = vec2(width) / vec2(textureSize(TEXTURE, 0)); 
+	vec2 size = vec2(width) / vec2(textureName_size); 
+	
+	vec4 sprite_color = texture(TEXTURE, UV); 
+	
+	float alpha = sprite_color.a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a; 
+	
+	vec3 final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a); 
+	COLOR = vec4(final_color, clamp(alpha, 0.0, 1.0)); 
+}"
+
+[sub_resource type="ShaderMaterial" id=40]
+shader = SubResource( 39 )
+shader_param/width = 4.67
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/textureName_size = Vector2( 600, 600 )
+
+[sub_resource type="CanvasItemMaterial" id=36]
+blend_mode = 2
+
+[sub_resource type="Gradient" id=35]
+colors = PoolColorArray( 0.230902, 0.395894, 0.489151, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=37]
+gradient = SubResource( 35 )
+width = 214
+height = 144
+fill_from = Vector2( 0, 1 )
+fill_to = Vector2( 0, 0 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
 font_data = ExtResource( 5 )
 
+[sub_resource type="DynamicFont" id=38]
+size = 30
+outline_color = Color( 0.00209421, 0.206696, 0.0729175, 1 )
+font_data = ExtResource( 5 )
+
 [sub_resource type="Theme" id=2]
 
-[sub_resource type="DynamicFont" id=3]
-size = 40
+[sub_resource type="DynamicFont" id=41]
+size = 70
+outline_size = 21
+outline_color = Color( 0.054902, 0.32549, 0.478431, 1 )
 font_data = ExtResource( 5 )
 
 [node name="options_button" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.0235294, 0.0745098, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.379564, 0.668923, 0.824799, 1 )
+
+[node name="gear_handler" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 150, 170 )
+script = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 40 )
+position = Vector2( 115.5, 604.5 )
+scale = Vector2( 0.541667, 0.541667 )
+texture = ExtResource( 12 )
+
+[node name="Sprite2" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 40 )
+position = Vector2( 101.875, 903.125 )
+scale = Vector2( 0.319583, 0.319583 )
+texture = ExtResource( 12 )
+
+[node name="Sprite3" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 40 )
+position = Vector2( 340.75, 742.75 )
+scale = Vector2( 0.269167, 0.269167 )
+texture = ExtResource( 7 )
+
+[node name="Sprite4" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 40 )
+position = Vector2( 638, 1159 )
+scale = Vector2( 0.375, 0.375 )
+texture = ExtResource( 12 )
+
+[node name="Sprite5" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 40 )
+position = Vector2( 676.75, 918.75 )
+scale = Vector2( 0.269167, 0.269167 )
+texture = ExtResource( 7 )
+
+[node name="Sprite6" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 40 )
+position = Vector2( 533.125, 993.875 )
+scale = Vector2( 0.199583, 0.199583 )
+texture = ExtResource( 12 )
+
+[node name="Sprite7" type="Sprite" parent="gear_handler"]
+modulate = Color( 0, 0, 0, 0.411765 )
+show_behind_parent = true
+material = SubResource( 40 )
+position = Vector2( 200, 1094 )
+scale = Vector2( 0.199583, 0.199583 )
+texture = ExtResource( 7 )
+
+[node name="ColorRect3" type="TextureRect" parent="."]
+material = SubResource( 36 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_bottom = 2.0
+mouse_filter = 2
+texture = SubResource( 37 )
+expand = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
@@ -38,9 +173,6 @@ anchor_bottom = 1.0
 margin_left = -225.0
 margin_top = -816.0
 margin_right = 225.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Button3" type="Button" parent="VBoxContainer"]
 visible = false
@@ -64,37 +196,37 @@ __meta__ = {
 }
 
 [node name="Button" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
-margin_right = 247.0
+margin_right = 227.0
 margin_bottom = 120.0
-rect_min_size = Vector2( 0, 120 )
+rect_min_size = Vector2( 210, 120 )
 focus_neighbour_top = NodePath("../../Button3")
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 38 )
 custom_icons/off = ExtResource( 6 )
 custom_icons/on = ExtResource( 6 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/normal = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 11 )
 pressed = true
-text = "MUSIC"
+text = " MUSIC"
 align = 1
 
 [node name="Button2" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
-margin_left = 267.0
-margin_right = 434.0
+margin_left = 235.0
+margin_right = 445.0
 margin_bottom = 120.0
-rect_min_size = Vector2( 0, 120 )
+rect_min_size = Vector2( 210, 120 )
 focus_neighbour_top = NodePath("../../Button3")
 size_flags_horizontal = 6
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 38 )
 custom_icons/off = ExtResource( 6 )
 custom_icons/on = ExtResource( 6 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/normal = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 11 )
 pressed = true
-text = "SFX"
+text = " SFX"
 align = 1
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
@@ -102,11 +234,11 @@ margin_top = 124.0
 margin_right = 450.0
 margin_bottom = 244.0
 rect_min_size = Vector2( 0, 120 )
-custom_fonts/font = SubResource( 1 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = SubResource( 38 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 11 )
 text = "SOURCE CODE"
 
 [node name="Button4" type="Button" parent="VBoxContainer"]
@@ -115,11 +247,11 @@ margin_right = 450.0
 margin_bottom = 368.0
 rect_min_size = Vector2( 0, 120 )
 focus_neighbour_bottom = NodePath("../HBoxContainer/Button")
-custom_fonts/font = SubResource( 1 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = SubResource( 38 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 11 )
 text = "FEEDBACK"
 
 [node name="Button5" type="Button" parent="VBoxContainer"]
@@ -128,26 +260,26 @@ margin_right = 450.0
 margin_bottom = 492.0
 rect_min_size = Vector2( 0, 120 )
 focus_neighbour_bottom = NodePath("../HBoxContainer/Button")
-custom_fonts/font = SubResource( 1 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = SubResource( 38 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 11 )
 text = "BACK"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 anchor_right = 1.0
-margin_bottom = 87.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_top = 32.0
+margin_bottom = 132.0
 
 [node name="Label" type="Label" parent="VBoxContainer2"]
 margin_right = 720.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 theme = SubResource( 2 )
-custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_shadow = Color( 0.148628, 0.538336, 0.758606, 1 )
+custom_constants/shadow_offset_y = 6
+custom_fonts/font = SubResource( 41 )
 text = "OPTIONS"
 align = 1
 valign = 1

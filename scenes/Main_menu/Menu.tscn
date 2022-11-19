@@ -1,19 +1,21 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/Main_menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=3]
-[ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=4]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonFocus.tres" type="StyleBox" id=3]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonPressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://Peach Days.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonNormal.tres" type="StyleBox" id=6]
 [ext_resource path="res://imgs/Untitled175_20221111173512.png" type="Texture" id=7]
 [ext_resource path="res://scenes/Main_menu/gear_handler.gd" type="Script" id=8]
 [ext_resource path="res://imgs/icons/github-logo-6532.png" type="Texture" id=9]
 [ext_resource path="res://imgs/icons/youtube-logo-2431.png" type="Texture" id=10]
 [ext_resource path="res://imgs/icons/itch io 64.png" type="Texture" id=11]
+[ext_resource path="res://imgs/Untitled176_20221118180223.png" type="Texture" id=12]
 
 [sub_resource type="CanvasItemMaterial" id=27]
 
-[sub_resource type="Shader" id=29]
+[sub_resource type="Shader" id=37]
 code = "shader_type canvas_item; 
 render_mode unshaded; 
 
@@ -45,7 +47,7 @@ void fragment()
 }"
 
 [sub_resource type="ShaderMaterial" id=30]
-shader = SubResource( 29 )
+shader = SubResource( 37 )
 shader_param/width = 4.67
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/textureName_size = Vector2( 600, 600 )
@@ -63,14 +65,11 @@ height = 144
 fill_from = Vector2( 0, 1 )
 fill_to = Vector2( 0, 0 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=36]
 size = 32
 outline_size = 3
-outline_color = Color( 0, 0, 0, 1 )
+outline_color = Color( 0.0436314, 0.246595, 0.361313, 1 )
 font_data = ExtResource( 2 )
-
-[sub_resource type="StyleBoxFlat" id=26]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="DynamicFont" id=25]
 size = 15
@@ -94,7 +93,9 @@ font_data = ExtResource( 5 )
 font_path = "res://fonts/Press Start 2P Font.ttf"
 
 [sub_resource type="DynamicFont" id=32]
-size = 106
+size = 96
+outline_size = 20
+outline_color = Color( 0.184314, 0.0901961, 0.380392, 1 )
 font_data = SubResource( 31 )
 
 [sub_resource type="Animation" id=33]
@@ -133,6 +134,9 @@ tracks/0/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
@@ -162,7 +166,7 @@ show_behind_parent = true
 material = SubResource( 30 )
 position = Vector2( 115.5, 604.5 )
 scale = Vector2( 0.541667, 0.541667 )
-texture = ExtResource( 7 )
+texture = ExtResource( 12 )
 
 [node name="Sprite2" type="Sprite" parent="gear_handler"]
 modulate = Color( 0, 0, 0, 0.411765 )
@@ -170,7 +174,7 @@ show_behind_parent = true
 material = SubResource( 30 )
 position = Vector2( 101.875, 903.125 )
 scale = Vector2( 0.319583, 0.319583 )
-texture = ExtResource( 7 )
+texture = ExtResource( 12 )
 
 [node name="Sprite3" type="Sprite" parent="gear_handler"]
 modulate = Color( 0, 0, 0, 0.411765 )
@@ -186,7 +190,7 @@ show_behind_parent = true
 material = SubResource( 30 )
 position = Vector2( 638, 1159 )
 scale = Vector2( 0.375, 0.375 )
-texture = ExtResource( 7 )
+texture = ExtResource( 12 )
 
 [node name="Sprite5" type="Sprite" parent="gear_handler"]
 modulate = Color( 0, 0, 0, 0.411765 )
@@ -202,7 +206,7 @@ show_behind_parent = true
 material = SubResource( 30 )
 position = Vector2( 533.125, 993.875 )
 scale = Vector2( 0.199583, 0.199583 )
-texture = ExtResource( 7 )
+texture = ExtResource( 12 )
 
 [node name="Sprite7" type="Sprite" parent="gear_handler"]
 modulate = Color( 0, 0, 0, 0.411765 )
@@ -242,11 +246,11 @@ margin_bottom = 72.0
 rect_min_size = Vector2( 0, 120 )
 rect_pivot_offset = Vector2( 155, 60 )
 focus_neighbour_top = NodePath("../Button3")
-custom_fonts/font = SubResource( 7 )
-custom_styles/hover = ExtResource( 3 )
+custom_fonts/font = SubResource( 36 )
+custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = SubResource( 26 )
-custom_styles/normal = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 6 )
 text = "PLAY"
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
@@ -255,11 +259,11 @@ margin_right = 310.0
 margin_bottom = 284.0
 rect_min_size = Vector2( 0, 120 )
 rect_pivot_offset = Vector2( 155, 60 )
-custom_fonts/font = SubResource( 7 )
-custom_styles/hover = ExtResource( 3 )
+custom_fonts/font = SubResource( 36 )
+custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = SubResource( 26 )
-custom_styles/normal = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 6 )
 text = "OPTIONS"
 
 [node name="Button3" type="Button" parent="VBoxContainer"]
@@ -269,11 +273,11 @@ margin_bottom = 450.0
 rect_min_size = Vector2( 0, 120 )
 rect_pivot_offset = Vector2( 155, 60 )
 focus_neighbour_bottom = NodePath("../Button")
-custom_fonts/font = SubResource( 7 )
-custom_styles/hover = ExtResource( 3 )
+custom_fonts/font = SubResource( 36 )
+custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = SubResource( 26 )
-custom_styles/normal = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 6 )
 text = "EXIT"
 
 [node name="SocialButt" type="VBoxContainer" parent="."]
