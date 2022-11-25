@@ -38,3 +38,15 @@ The game uses some of the sigular unit projects found in my repository, like cro
 
 
 
+![alt text](https://github.com/Rocket-007/Crossword-Game-Project---Godot/blob/main/screenshots/6.png)
+
+
+
+![alt text](https://github.com/Rocket-007/Crossword-Game-Project---Godot/blob/main/screenshots/7.png)
+
+
+
+![alt text](https://github.com/Rocket-007/Crossword-Game-Project---Godot/blob/main/screenshots/8.png)
+
+
+
