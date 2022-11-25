@@ -31,8 +31,8 @@ onready var Menu = get_tree().root.get_node("Menu")
 
 #____________________________________________________
 # Path to save file 
-#var path = "user://configuration.cfg"
-var path = "res://configuration.cfg"
+var path = "user://configuration.cfg"
+#var path = "res://configuration.cfg"
 var file_to_save= path
 var file_to_load= path
 
@@ -53,11 +53,9 @@ func delete_old_save():
 func createSave():
 	configFile.load(file_to_load) 
 	var err = configFile.load(file_to_load) 
+#	if the result of reading the file has problem then..
 	if err != OK:
-		# Add values to file 
-		configFile.set_value("Highest","level",0) 
-		configFile.set_value("Highest","clicks",0) 
-		configFile.set_value("Highest","time",0)
+		# Add values to file
 		
 #		set the level index to level 1
 		configFile.set_value("Level_Index","index",0)
@@ -65,18 +63,19 @@ func createSave():
 #		set all words in the level to not solved
 		for i in range(Levels.levels_json[0].size()):
 			configFile.set_value("Level_Words",Levels.levels_json[0][i][0],false)
-		
-		
-		
-		configFile.set_value("Overall","clicks",0) 
-		configFile.set_value("Overall","time",0)
-		
-		configFile.set_value("Settings","music",true)
-		configFile.set_value("Settings","sfx",true)
 	 
 		# Save file 
 		configFile.save(file_to_save)
 		print("created save")
+#	incase the file exists but what we want is not inside
+	else:
+		if  !configFile.has_section("Level_Index"):
+	#		set the level index to level 1
+			configFile.set_value("Level_Index","index",0)
+		if  !configFile.has_section("Level_Words"):
+#			set all words in the level to not solved
+			for i in range(Levels.levels_json[0].size()):
+				configFile.set_value("Level_Words",Levels.levels_json[0][i][0],false)
 #
 #	if configFile.has_section("Highest"):
 #		pass
@@ -161,6 +160,9 @@ func _process(delta):
 #func _process(delta):
 #	pass
 func _input(event):
+#	dont remove "return" :-7
+	return
+	
 #	make sure we dont go off the bonds of the Level.level_json size
 	if event.is_action_pressed("ui_right") and level_index+1 < Levels.levels_json.size():
 		delete_old_save()

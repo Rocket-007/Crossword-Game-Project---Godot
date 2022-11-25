@@ -48,14 +48,11 @@ shader_param/outline_color = Color( 1, 1, 1, 1 )
 shader_param/textureName_size = Vector2( 600, 600 )
 
 [node name="ProgressBar" type="ProgressBar"]
-anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -367.0
-margin_top = -20.0
-margin_right = 367.0
-margin_bottom = 20.0
+margin_top = -16.5
+margin_bottom = 16.5
 custom_fonts/font = SubResource( 1 )
 custom_styles/bg = SubResource( 5 )
 

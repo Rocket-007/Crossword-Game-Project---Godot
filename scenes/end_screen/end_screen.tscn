@@ -1,15 +1,138 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/end_screen/end_screen.gd" type="Script" id=2]
 [ext_resource path="res://imgs/particle0.png" type="Texture" id=3]
-[ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=4]
-[ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonFocus.tres" type="StyleBox" id=4]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonPressed.tres" type="StyleBox" id=5]
 [ext_resource path="res://imgs/robo_idle.png" type="Texture" id=6]
+[ext_resource path="res://imgs/robocheers.png" type="Texture" id=7]
+[ext_resource path="res://sounds/sfx/658266__matrixxx__retro-inspect-sound-ui-or-in-game-notification.wav" type="AudioStream" id=8]
+[ext_resource path="res://stylings/newButtons_blueSeeGree/ButtonNormal.tres" type="StyleBox" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 26
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 32
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Shader" id=51]
+code = "shader_type canvas_item; 
+render_mode unshaded; 
+
+uniform float width : hint_range(0.0, 16.0); 
+uniform vec4 outline_color : hint_color;
+
+uniform sampler2D textureName;
+uniform vec2 textureName_size;
+
+void fragment() 
+{ 
+	//vec2 size = vec2(width) / vec2(textureSize(TEXTURE, 0)); 
+	vec2 size = vec2(width) / vec2(textureName_size); 
+	
+	vec4 sprite_color = texture(TEXTURE, UV); 
+	
+	float alpha = sprite_color.a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a; 
+	
+	vec3 final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a); 
+	COLOR = vec4(final_color, clamp(alpha, 0.0, 1.0)); 
+}"
+
+[sub_resource type="ShaderMaterial" id=52]
+shader = SubResource( 51 )
+shader_param/width = 1.3
+shader_param/outline_color = Color( 0.0235294, 0.0745098, 0.156863, 1 )
+shader_param/textureName_size = Vector2( 488, 150 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 7 )
+region = Rect2( 61, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 7 )
+region = Rect2( 122, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 7 )
+region = Rect2( 183, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 7 )
+region = Rect2( 244, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 7 )
+region = Rect2( 305, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 7 )
+region = Rect2( 366, 0, 61, 150 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 7 )
+region = Rect2( 427, 0, 61, 150 )
+
+[sub_resource type="SpriteFrames" id=53]
+animations = [ {
+"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ) ],
+"loop": false,
+"name": "default",
+"speed": 12.0
+} ]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item; 
+render_mode unshaded; 
+
+uniform float width : hint_range(0.0, 16.0); 
+uniform vec4 outline_color : hint_color;
+
+uniform sampler2D textureName;
+uniform vec2 textureName_size;
+
+void fragment() 
+{ 
+	//vec2 size = vec2(width) / vec2(textureSize(TEXTURE, 0)); 
+	vec2 size = vec2(width) / vec2(textureName_size); 
+	
+	vec4 sprite_color = texture(TEXTURE, UV); 
+	
+	float alpha = sprite_color.a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, -size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, size.y)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a; 
+	alpha += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a; 
+	
+	vec3 final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a); 
+	COLOR = vec4(final_color, clamp(alpha, 0.0, 1.0)); 
+}"
+
+[sub_resource type="ShaderMaterial" id=54]
+shader = SubResource( 3 )
+shader_param/width = 1.3
+shader_param/outline_color = Color( 0.0235294, 0.0745098, 0.156863, 1 )
+shader_param/textureName_size = Vector2( 1037, 111 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 6 )
@@ -19,7 +142,7 @@ region = Rect2( 0, 0, 61, 111 )
 atlas = ExtResource( 6 )
 region = Rect2( 61, 0, 61, 111 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=38]
 atlas = ExtResource( 6 )
 region = Rect2( 122, 0, 61, 111 )
 
@@ -79,22 +202,13 @@ region = Rect2( 915, 0, 61, 111 )
 atlas = ExtResource( 6 )
 region = Rect2( 976, 0, 61, 111 )
 
-[sub_resource type="SpriteFrames" id=19]
+[sub_resource type="SpriteFrames" id=55]
 animations = [ {
-"frames": [ SubResource( 18 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"frames": [ SubResource( 18 ), SubResource( 2 ), SubResource( 38 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "default",
 "speed": 4.0
 } ]
-
-[sub_resource type="DynamicFont" id=20]
-size = 32
-outline_size = 3
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=21]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="Animation" id=24]
 length = 0.001
@@ -156,9 +270,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -247.0
-margin_top = 152.0
+margin_top = 208.0
 margin_right = 247.0
-margin_bottom = 1008.0
+margin_bottom = 1064.0
 custom_fonts/font = SubResource( 1 )
 text = "
 
@@ -169,27 +283,22 @@ THANKS FOR PLAYING
 CREDITS:
 _
 
-PROGRAMMER:
-ROCKET007
+
+
+PROGRAMMER &
+GAME DESIGNER:
+
+ROCKET_007
 
 
 
 
 
 
-OTHERS(ART, MUSIC):
+ART & MUSIC:
+
 RAMPAGE"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Label"]
-position = Vector2( 236, -46 )
-scale = Vector2( 2.08504, 2.08504 )
-frames = SubResource( 19 )
-frame = 2
-playing = true
 
 [node name="Button" type="Button" parent="Label"]
 anchor_left = 0.5
@@ -203,14 +312,98 @@ rect_min_size = Vector2( 0, 120 )
 rect_pivot_offset = Vector2( 155, 60 )
 focus_neighbour_top = NodePath("../Button3")
 custom_fonts/font = SubResource( 20 )
-custom_styles/hover = ExtResource( 4 )
+custom_styles/hover = ExtResource( 9 )
 custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 21 )
-custom_styles/normal = ExtResource( 4 )
-text = ":-("
-__meta__ = {
-"_edit_use_anchors_": false
-}
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 9 )
+text = "bye"
+
+[node name="robot_box" type="Control" parent="Label"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -58.0
+margin_top = -208.0
+margin_right = 58.0
+margin_bottom = -9.0
+
+[node name="robot_cheer" type="AnimatedSprite" parent="Label/robot_box"]
+visible = false
+material = SubResource( 52 )
+position = Vector2( 49, 60 )
+scale = Vector2( 2.1, 2.1 )
+frames = SubResource( 53 )
+frame = 7
+
+[node name="robot_idle" type="AnimatedSprite" parent="Label/robot_box"]
+material = SubResource( 54 )
+position = Vector2( 49, 103 )
+scale = Vector2( 2.1, 2.1 )
+frames = SubResource( 55 )
+frame = 12
+playing = true
+
+[node name="click_robo" type="AudioStreamPlayer" parent="Label/robot_box"]
+stream = ExtResource( 8 )
+bus = "sfx"
+
+[node name="Label" type="Label" parent="Label"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -247.0
+margin_top = 152.0
+margin_right = 247.0
+margin_bottom = 1008.0
+custom_fonts/font = SubResource( 1 )
+text = "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+you are still here?!...
+
+ bruhhhh!!.."
+align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.07
@@ -220,6 +413,7 @@ anims/runing_particle1 = SubResource( 25 )
 [node name="Container" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -253,3 +447,6 @@ initial_velocity = 124.29
 color_ramp = SubResource( 23 )
 hue_variation = 1.0
 hue_variation_random = 0.15
+
+[connection signal="pressed" from="Label/Button" to="." method="_on_Button_pressed"]
+[connection signal="gui_input" from="Label/robot_box" to="." method="_on_robot_box_gui_input"]

@@ -11,9 +11,6 @@ margin_left = -75.0
 margin_top = -76.0
 margin_right = -11.0
 margin_bottom = -12.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureButton6" parent="." instance=ExtResource( 4 )]
 margin_left = 15.0

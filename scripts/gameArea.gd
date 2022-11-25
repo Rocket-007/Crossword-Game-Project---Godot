@@ -42,7 +42,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$Label.text = "level: " + str(GlobalState.level_index + 1)
+	$Label.text = "LEVEL: " + str(GlobalState.level_index + 1)
 #	$Label.text = "level: " + str(get_node("/root/GlobalState").level_index + 1)
 	
 	
@@ -67,11 +67,7 @@ func _input(event):
 #		get_tree().paused = true
 #		pause.show()
 		pass
-	if event is InputEventKey and event.scancode == KEY_A:
-		SceneChanger.goto_scene("res://scenes/gameArea.tscn", self)
-	if event is InputEventKey and event.scancode == KEY_D:
-		GlobalState.input_json = Levels.levels_json[(GlobalState.level_index+1)-1] 
-		SceneChanger.goto_scene("res://scenes/gameArea.tscn", self)
+
 		
 		
 func _notification(what):
@@ -105,7 +101,7 @@ func _on_WordTileMap_level_completed():
 #	animate the completed level panel
 	yield(get_tree().create_timer(1.0), "timeout")
 	$Panel.show()
-	$Panel/level_clear_aniPlay.play("floating")
+#	$Panel/level_clear_aniPlay.play("floating")
 	temp_postion = $Panel.rect_position
 	temp_color = $Panel.modulate
 	$Panel/Tween.interpolate_property($Panel, "rect_position", Vector2(0, 390) + temp_postion, temp_postion, 0.9, Tween.TRANS_BACK, Tween.EASE_OUT)
@@ -132,6 +128,10 @@ func _on_nextLevel_pressed():
 		
 		GlobalState.configFile.set_value("Level_Index","index",GlobalState.level_index)
 		GlobalState.configFile.save(GlobalState.file_to_save)
+		
+#	goto disable the button as soon as you press it cause
+#	someone can just spam it and pass 16 more levels
+	$Panel/nextLevel.disabled = true
 
 
 
@@ -159,6 +159,4 @@ func _on_robot_box_gui_input(event):
 		$robot_box/robot_cheer.play()
 		$robot_box/click_robo.play()
 
-		
-#		$robot_box/robot_idle.stop()
 	

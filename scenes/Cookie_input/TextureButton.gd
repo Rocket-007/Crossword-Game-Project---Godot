@@ -29,6 +29,7 @@ func _ready():
 	connect("button_down", self, "_on_TextureButtons_down")
 	connect("button_up", self, "_on_TextureButtons_up")
 	
+#	you can comment this out to start seeing the button and the size it contains etc
 	self.self_modulate = Color(0,0,0,0)
 	
 	

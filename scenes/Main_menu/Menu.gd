@@ -72,7 +72,8 @@ func _ready():
 	
 	$VBoxContainer/Button.grab_focus()
 	
-	expand_menuButton()
+#	ik said i should remove the play button animation
+#	expand_menuButton()
 	
 	
 
@@ -88,15 +89,14 @@ func _process(delta):
 
 func _on_Button_pressed():
 	GlobalState.get_node("click_button").play()
-	get_tree().change_scene("res://Scenes/levels/levels_select.tscn")
+	get_tree().change_scene("res://scenes/levels/levels_select.tscn")
 
 
 func _on_Button2_pressed():
-	
 	GlobalState.get_node("click_button").play()
 #	var options = load("res://debug_overlay.tscn").instance()
 	get_tree().change_scene("res://scenes/options/options_button.tscn")
-
+#	get_tree().change_scene("res://scenes/levels/levels_select.tscn")
 
 func _on_Button3_pressed():
 	GlobalState.get_node("click_button").play()

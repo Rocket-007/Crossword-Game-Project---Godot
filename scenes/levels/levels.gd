@@ -21,41 +21,47 @@ extends Node
 #[2] - solved
 
 var levels_json = [
-
+#	level 1
 	[["IS", ""],
 	["SIX",""],
 	],
 	
+#	level 2
 	[["DAD", ""],
 	["ADD",""],
 	],
 	
-#	levle 1
+#	levle 3
 	[["HOW", ""],
 	["WHO",""],
 	],
-
+	
+#	Level 4
 	[["ERA", ""],
 	["EAR",""],
 	["ARE",""],
 	],
 	
+#	level 5
 	[["LAW", ""],
 	["ALL",""],
 	["WALL",""],
 	],
 	
+#	level 6
 	[["YOUR", ""],
 	["OUR",""],
 	["OR",""],
 	],
 	
+#	level 7
 	[["RAY", ""],
 	["DRY",""],
-	["DAY",""],
+#	["DAY",""],
 	["YARD",""]
 	],
 	
+#	level 8
 	[["WAS", ""],
 	["WAR",""],
 	["SAW",""],
@@ -73,7 +79,7 @@ var levels_json = [
 #	levle 10
 	[["OLD", ""],
 	["LOG",""],
-	["GOD",""],
+#	["GOD",""],
 	["DOG",""],
 	["GOLD",""],
 	],
@@ -84,7 +90,7 @@ var levels_json = [
 	[["WON", ""],
 	["ROW",""],
 	["OWN",""],
-	["NOW",""],
+#	["NOW",""],
 	["NOR", ""],
 	["WORN",""],
 	],
@@ -95,7 +101,7 @@ var levels_json = [
 	["TEN",""],
 #	["ONE", ""],
 	["NOT", ""],
-	["NET",""],
+#	["NET",""],
 	["TONE",""],
 	["NOTE",""],
 	],
@@ -136,7 +142,7 @@ var levels_json = [
 	
 #	Level 17
 	[["TIE", ""],
-	["THE",""],
+#	["THE",""],
 	["HIT",""],
 	["GET",""],
 	["EIGHT",""],
@@ -191,9 +197,9 @@ var levels_json = [
 
 	#	Level 23
 	[["DUE", ""],
-#	["DUG",""],
+	["DUG",""],
 	["DIG",""],
-	["DIE",""],
+#	["DIE",""],
 	["GUIDE",""],
 	],
 
@@ -234,7 +240,7 @@ var levels_json = [
 	["SUE",""],
 	["SEC",""],
 	["CUE",""],
-	["CUES",""],
+#	["CUES",""],
 	["CLUE",""],
 	["CLUES",""],
 	],
@@ -275,8 +281,8 @@ var levels_json = [
 	["DOT",""],
 	["BOT",""],
 	["BUT",""],
-	["BUD",""],
-	["BOUT",""],
+#	["BUD",""],
+#	["BOUT",""],
 	["DOUBT",""],
 	],
 
@@ -297,8 +303,8 @@ var levels_json = [
 	],
 		
 	#	Level 35
-	[["YOU", ""],
-	["SOY",""],
+	[["SOY", ""],
+#	["YOU",""],
 	["SLY",""],
 	["SOUL",""],
 	["LOUSY",""],
@@ -318,7 +324,7 @@ var levels_json = [
 	["HAY",""],
 	["HAD",""],
 	["DRY",""],
-	["DAY",""],
+#	["DAY",""],
 	["YARD",""],
 	["HARD",""],
 	["HARDY",""],
@@ -491,7 +497,7 @@ var levels_json = [
 	["SEND",""],
 	["ENDS",""],
 	["BEND",""],
-	["BEDS",""],
+#	["BEDS",""],
 	["BENDS",""],
 	],
 	
@@ -538,7 +544,7 @@ var levels_json = [
 	["CHOP",""],
 	["PORCH",""],
 	],
-
+	
 	#	Level 62
 	[["TON", ""],
 	["NOT",""],
@@ -650,8 +656,8 @@ var levels_json = [
 #	["WON",""],
 	["ROW",""],
 	["OWN",""],
-	["NOR",""],
-	["COW",""],
+#	["NOR",""],
+#	["COW",""],
 	["WORN",""],
 	["CROW",""],
 	["CROWN",""],
@@ -803,7 +809,7 @@ var levels_json = [
 	[["SON", ""],
 	["ONE",""],
 	["ZONE",""],
-	["ONES",""],
+#	["ONES",""],
 	["NOSE",""],
 	["ZONES",""],
 	],
@@ -844,8 +850,8 @@ var levels_json = [
 
 	#	Level 94
 	[["RUM", ""],
-	["OUR",""],
-#	["HUM",""],
+#	["OUR",""],
+	["HUM",""],
 	["HOUR",""],
 	["HUMOR",""],
 	],
@@ -875,7 +881,7 @@ var levels_json = [
 	["MEAD", "clue2"],
 	["EAT", "clue3"],
 	["ATE", "clue4"],
-	["A", "clue4"],
+#	["A", "clue4"],
 	["MADE", "clue5"],
 	["DAM", "clue6"],
 	["MATED", "clue7"],
@@ -906,7 +912,7 @@ var levels_json = [
 	[["WAR", ""],
 	["RAW",""],
 	["ERA",""],
-	["EAR",""],
+#	["EAR",""],
 	["AWE",""],
 	["ARE",""],
 	["WEAR",""],
@@ -930,10 +936,10 @@ var levels_json = [
 	["PLOTS",""],
 	],
 
-
-	[["IS", ""],
-	["SIX",""],
-	],
+#
+#	[["IS", ""],
+#	["SIX",""],
+#	],
 	
 	
 	

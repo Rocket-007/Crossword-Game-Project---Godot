@@ -103,8 +103,16 @@ func _ready():
 	used_rect = self.get_used_rect().size * self.cell_size
 #	print("usedv ", used_rect)
 
-	var temp_postion = self.position
-	$Tween.interpolate_property(self, "position", Vector2(0, 200) + temp_postion, temp_postion, 1.2, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
+	
+#	animate the tile map popping downwards when the game starts
+#	actually we will do the animation for the tile board as its a control node and can be
+#	animated and anchored at the same time
+#	gotta use idle frame here otherwise it gives wrong values
+	yield(get_tree(), "idle_frame")
+	var temp_postion = get_parent().get_parent().get_node("tile_board").rect_global_position
+#	var temp_postion = self.position
+	$Tween.interpolate_property(get_parent().get_parent().get_node("tile_board"), "rect_global_position", Vector2(0, 200) + temp_postion, temp_postion, 1.2, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property(self, "position", Vector2(0, 200) + temp_postion, temp_postion, 1.2, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
 	$Tween.start()
 	
 #	play start sound
@@ -321,7 +329,9 @@ func _process(delta):
 	update()
 	
 	#	update the tilemap position accordingly to the center of its parent
+#	also update the tilemap y position according to the tile boards 
 	self.position.x = (get_parent().get_rect().get_center().x - (used_rect.x/2.5))# / self.scale.x
+	self.position.y = (get_parent().get_parent().get_node("tile_board").rect_position.y) + 30
 	pass
 
 

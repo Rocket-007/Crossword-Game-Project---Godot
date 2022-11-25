@@ -88,8 +88,8 @@ func _ready():
 		var instance_button_size = v.rect_size
 #		these will off set the label so the character appears in the middle of the button center
 #		instead of just the top left edge touching em 
-		label.margin_left = (instance_button_size.x/2) - 16
-		label.margin_top = (instance_button_size.y/2) - 16
+		label.margin_left = (instance_button_size.x/2) - 20#16
+		label.margin_top = (instance_button_size.y/2) - 20#16
 		
 		label.text = v.letter
 #		label.text = combinator_array[get_children().find(v)]

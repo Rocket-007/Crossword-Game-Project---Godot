@@ -48,7 +48,7 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=5]
 shader = SubResource( 7 )
 shader_param/width = 6.121
-shader_param/outline_color = Color( 0.0470588, 0.556863, 0.223529, 1 )
+shader_param/outline_color = Color( 0.784314, 0.486275, 0.564706, 1 )
 shader_param/textureName_size = Vector2( 600, 600 )
 
 [sub_resource type="Shader" id=3]
@@ -85,7 +85,7 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=6]
 shader = SubResource( 3 )
 shader_param/width = 3.427
-shader_param/outline_color = Color( 0.494118, 0.443137, 0.0705882, 1 )
+shader_param/outline_color = Color( 0.0705882, 0.494118, 0.435294, 1 )
 shader_param/textureName_size = Vector2( 600, 600 )
 
 [sub_resource type="Shader" id=8]
@@ -131,9 +131,6 @@ margin_top = 411.0
 margin_right = 558.0
 margin_bottom = 411.0
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Particles2D" type="CPUParticles2D" parent="."]
 visible = false
@@ -168,7 +165,7 @@ texture = ExtResource( 3 )
 modulate = Color( 1, 1, 1, 0.92549 )
 show_behind_parent = true
 material = SubResource( 4 )
-scale = Vector2( 0.7, 0.7 )
+scale = Vector2( 0.773333, 0.773333 )
 texture = ExtResource( 3 )
 
 [node name="Line2D" type="Line2D" parent="."]

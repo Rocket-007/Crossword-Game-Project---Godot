@@ -1,9 +1,6 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Scenes/options/options_button.gd" type="Script" id=1]
-[ext_resource path="res://stylings/ButtonNormal.tres" type="StyleBox" id=2]
-[ext_resource path="res://stylings/ButtonPressed.tres" type="StyleBox" id=3]
-[ext_resource path="res://stylings/ButtonFocus.tres" type="StyleBox" id=4]
+[ext_resource path="res://scenes/options/options_button.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Press Start 2P Font.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://imgs/transparent.png" type="Texture" id=6]
 [ext_resource path="res://imgs/Untitled175_20221111173512.png" type="Texture" id=7]
@@ -63,13 +60,10 @@ height = 144
 fill_from = Vector2( 0, 1 )
 fill_to = Vector2( 0, 0 )
 
-[sub_resource type="DynamicFont" id=1]
-size = 40
-font_data = ExtResource( 5 )
-
 [sub_resource type="DynamicFont" id=38]
 size = 30
-outline_color = Color( 0.00209421, 0.206696, 0.0729175, 1 )
+outline_size = 3
+outline_color = Color( 0.027451, 0.227451, 0.341176, 1 )
 font_data = ExtResource( 5 )
 
 [sub_resource type="Theme" id=2]
@@ -85,13 +79,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_horizontal_guides_": [ 778.0, 1005.0 ],
+"_edit_vertical_guides_": [ 1171.0 ]
 }
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.379564, 0.668923, 0.824799, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="gear_handler" type="Control" parent="."]
 anchor_right = 1.0
@@ -170,36 +168,36 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -225.0
-margin_top = -816.0
-margin_right = 225.0
-
-[node name="Button3" type="Button" parent="VBoxContainer"]
-visible = false
-margin_right = 450.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 0, 120 )
-focus_neighbour_bottom = NodePath("../HBoxContainer/Button")
-custom_fonts/font = SubResource( 1 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/normal = ExtResource( 2 )
-text = "HELP"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 450.0
-margin_bottom = 120.0
-mouse_filter = 2
+margin_left = -248.0
+margin_top = -769.0
+margin_right = 249.0
+custom_constants/separation = 30
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
-margin_right = 227.0
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 497.0
+margin_bottom = 120.0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+margin_left = 20.0
+margin_right = 477.0
+margin_bottom = 120.0
+mouse_filter = 2
+size_flags_horizontal = 4
+custom_constants/separation = 30
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="CheckButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+margin_right = 217.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 210, 120 )
-focus_neighbour_top = NodePath("../../Button3")
 custom_fonts/font = SubResource( 38 )
 custom_icons/off = ExtResource( 6 )
 custom_icons/on = ExtResource( 6 )
@@ -211,12 +209,11 @@ pressed = true
 text = " MUSIC"
 align = 1
 
-[node name="Button2" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
-margin_left = 235.0
-margin_right = 445.0
+[node name="Button2" type="CheckButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 247.0
+margin_right = 457.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 210, 120 )
-focus_neighbour_top = NodePath("../../Button3")
 size_flags_horizontal = 6
 custom_fonts/font = SubResource( 38 )
 custom_icons/off = ExtResource( 6 )
@@ -230,9 +227,9 @@ text = " SFX"
 align = 1
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
-margin_top = 124.0
-margin_right = 450.0
-margin_bottom = 244.0
+margin_top = 150.0
+margin_right = 497.0
+margin_bottom = 270.0
 rect_min_size = Vector2( 0, 120 )
 custom_fonts/font = SubResource( 38 )
 custom_styles/hover = ExtResource( 11 )
@@ -242,11 +239,11 @@ custom_styles/normal = ExtResource( 11 )
 text = "SOURCE CODE"
 
 [node name="Button4" type="Button" parent="VBoxContainer"]
-margin_top = 248.0
-margin_right = 450.0
-margin_bottom = 368.0
+margin_top = 300.0
+margin_right = 497.0
+margin_bottom = 420.0
 rect_min_size = Vector2( 0, 120 )
-focus_neighbour_bottom = NodePath("../HBoxContainer/Button")
+focus_neighbour_bottom = NodePath("../MarginContainer/HBoxContainer/Button")
 custom_fonts/font = SubResource( 38 )
 custom_styles/hover = ExtResource( 11 )
 custom_styles/pressed = ExtResource( 10 )
@@ -255,11 +252,11 @@ custom_styles/normal = ExtResource( 11 )
 text = "FEEDBACK"
 
 [node name="Button5" type="Button" parent="VBoxContainer"]
-margin_top = 372.0
-margin_right = 450.0
-margin_bottom = 492.0
+margin_top = 450.0
+margin_right = 497.0
+margin_bottom = 570.0
 rect_min_size = Vector2( 0, 120 )
-focus_neighbour_bottom = NodePath("../HBoxContainer/Button")
+focus_neighbour_bottom = NodePath("../MarginContainer/HBoxContainer/Button")
 custom_fonts/font = SubResource( 38 )
 custom_styles/hover = ExtResource( 11 )
 custom_styles/pressed = ExtResource( 10 )
@@ -271,6 +268,9 @@ text = "BACK"
 anchor_right = 1.0
 margin_top = 32.0
 margin_bottom = 132.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="VBoxContainer2"]
 margin_right = 720.0
@@ -284,9 +284,8 @@ text = "OPTIONS"
 align = 1
 valign = 1
 
-[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_Button3_pressed"]
-[connection signal="toggled" from="VBoxContainer/HBoxContainer/Button" to="." method="_on_Button_toggled"]
-[connection signal="toggled" from="VBoxContainer/HBoxContainer/Button2" to="." method="_on_Button2_toggled"]
+[connection signal="toggled" from="VBoxContainer/MarginContainer/HBoxContainer/Button" to="." method="_on_Button_toggled"]
+[connection signal="toggled" from="VBoxContainer/MarginContainer/HBoxContainer/Button2" to="." method="_on_Button2_toggled"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button4" to="." method="_on_Button4_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button5" to="." method="_on_Button5_pressed"]

@@ -48,7 +48,7 @@ func displayOverlayDebugging():
 	
 func _ready():
 #	var combinator_array =  get_parent().get_node("union_combinator").combinator_array
-	displayOverlayDebugging()
+#	displayOverlayDebugging()
 	
 
 	pass
@@ -147,7 +147,7 @@ func _draw():
 		var default_font = Control.new().get_font("font")
 #		draw_string(default_font, $Line2D.get_point_position(i), "            " + str($Line2D.get_point_position(i).round()))
 #		draw_string(default_font, $Line2D.get_point_position(i), "             \n\n\n" + str(i))
-		draw_circle($Line2D.get_point_position(i), 30.0, Color("2f1761"))
+		draw_circle($Line2D.get_point_position(i), 35.0, Color("2f1761"))
 #		$Label.rect_global_position
 		for v in $CustomButtons.get_children():
 #			draw_circle(v.rect_global_position, 45.0, Color.yellow)
