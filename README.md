@@ -1,5 +1,9 @@
 # Crossword-Game-Project---Godot
-A game that uses most of the sigular units projects found in my repository, like crossword generator and draw line from point to another
+
+A fun crossword game with tons(100+) of levels to keep you engaged for a couple of hours.
+
+
+The game uses some of the sigular unit projects found in my repository, like crossword generator and draw line from point to another
 
 
 
