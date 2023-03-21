@@ -2,6 +2,8 @@
 
 A fun crossword game with tons(100+) of levels to keep you engaged for a couple of hours.
 
+[Apk Download Page/Play in Browser](https://rocket-007.itch.io/word-bot)
+
 
 The game uses some of the sigular unit projects found in my repository, like crossword generator and draw line from point to another
 
